@@ -1,5 +1,3 @@
-var mediator = Chaplin.mediator;
-
 var NavigationView = Chaplin.View.extend({
    initialize: function () {
       this.template = require('views/nav/nav-items');
@@ -18,12 +16,12 @@ var NavigationView = Chaplin.View.extend({
    }
 });
 
-var Navigation = Chaplin.Controller.extend({
+module.exports = Chaplin.Controller.extend({
    view: {},
 
    initialize: function () {
       console.log('Navigation.initialize');
-      mediator.subscribe('dispatcher:dispatch', _.bind(this._route, this));
+      Chaplin.mediator.subscribe('dispatcher:dispatch', _.bind(this._route, this));
 
       this.view = new NavigationView({
          el: '#main-navigation',
@@ -38,5 +36,3 @@ var Navigation = Chaplin.Controller.extend({
       this.view.$("li[data-view-name='" + route.controller + "']").addClass('active');
    }
 });
-
-module.exports = Navigation;

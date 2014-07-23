@@ -1,9 +1,5 @@
-var Application = Chaplin.Application.extend({
+module.exports = Chaplin.Application.extend({
    initDispatcher: function (options) {
-      console.log('Application.initDispatcher');
-
       this.dispatcher = new Chaplin.Dispatcher(options);
    }
 });
-
-module.exports = Application;
