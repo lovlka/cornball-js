@@ -5,17 +5,16 @@
   "dependencies": {
     "chaplin": "~1.0.0",
     "console-polyfill": "~0.1.0",
-    "lodash": "~2.4.0",
     "jquery": "~2.0.2",
     "jquery-mockjax": "1.5.3",
     "momentjs": "~2.6.0",
+    "bootstrap": "3.2.0",
     "bootbox": "4.2.0",
     "underscore.string": "https://github.com/epeli/underscore.string.git#master"
   },
   "overrides": {
     "backbone": {
       "dependencies": {
-        "lodash": "*",
         "jquery": "*"
       },
       "main": "backbone.js"
