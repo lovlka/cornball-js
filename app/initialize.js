@@ -1,15 +1,16 @@
 var Application = require('application');
-var Navigation = require('navigation');
-var routes = require('routes');
+var NavController = require('controllers/nav-controller');
 
 $(function () {
+   require('mockjax');
+
    new Application({
          title: 'Cornball',
          controllerSuffix: '-controller',
-         routes: routes
+         routes: require('routes')
       }
    );
 
-   new Navigation();
+   new NavController();
 
 });
