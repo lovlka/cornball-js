@@ -5,7 +5,10 @@ var DeckView = require('views/deck/deck-view');
 module.exports = Chaplin.Controller.extend({
    show: function (params) {
       this.model = new Chaplin.Model({});
+
       this.deck = new CardCollection();
+      this.deck.shuffle();
+
       this.view = new DeckView({
          model: this.model,
          collection: this.deck
