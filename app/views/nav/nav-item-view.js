@@ -7,6 +7,16 @@ module.exports = Chaplin.View.extend({
       Chaplin.View.prototype.initialize.call(this, arguments);
    },
 
+   events: {
+      'click a' : 'navigate'
+   },
+
+   navigate: function(event) {
+      this.publishEvent('navigate', this.model.get('action'));
+      event.stopPropagation();
+      event.preventDefault();
+   },
+
    getTemplateFunction: function() {
       return this.template;
    },
