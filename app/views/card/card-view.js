@@ -13,5 +13,10 @@ module.exports = Chaplin.View.extend({
 
    getTemplateData: function() {
       return this.model.attributes;
+   },
+
+   render: function() {
+      Chaplin.View.prototype.render.call(this, arguments);
+      this.$el.draggable({ revert: true });
    }
 });

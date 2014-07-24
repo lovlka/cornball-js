@@ -8,6 +8,7 @@
       "lodash": "~2.4.0",
       "jquery": "~2.0.2",
       "jquery-mockjax": "1.5.3",
+      "jquery-ui": "1.11.0",
       "momentjs": "~2.6.0",
       "bootstrap": "3.2.0",
       "bootbox": "4.2.0",
