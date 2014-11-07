@@ -1,6 +1,7 @@
 var NavView = require('views/nav/nav-view');
 var NavCollection = require('collections/nav-collection');
 var AboutView = require('views/about/about-view');
+var StatisticsView = require('views/statistics/statistics-view');
 
 module.exports = Chaplin.Controller.extend({
    initialize: function () {
@@ -24,12 +25,22 @@ module.exports = Chaplin.Controller.extend({
    navigate: function(action) {
       console.log('navigate', action);
 
-      if(action === 'about') {
-         this.showAbout();
+      switch(action)
+      {
+         case 'about':
+            this.showAbout();
+            break;
+         case 'statistics':
+            this.showStatistics();
+            break;
       }
    },
 
    showAbout: function() {
       this.aboutView = new AboutView({ model: this.model });
+   },
+
+   showStatistics: function() {
+      this.statisticsView = new StatisticsView({ model: this.model });
    }
 });
