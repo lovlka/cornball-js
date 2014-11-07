@@ -2,6 +2,7 @@ var NavView = require('views/nav/nav-view');
 var NavCollection = require('collections/nav-collection');
 var AboutView = require('views/about/about-view');
 var StatisticsView = require('views/statistics/statistics-view');
+var HighscoreView = require('views/highscore/highscore-view');
 
 module.exports = Chaplin.Controller.extend({
    initialize: function () {
@@ -33,6 +34,9 @@ module.exports = Chaplin.Controller.extend({
          case 'statistics':
             this.showStatistics();
             break;
+         case 'highscore':
+            this.showHighscore();
+            break;
       }
    },
 
@@ -42,5 +46,9 @@ module.exports = Chaplin.Controller.extend({
 
    showStatistics: function() {
       this.statisticsView = new StatisticsView({ model: this.model });
+   },
+
+   showHighscore: function() {
+      this.highscoreView = new HighscoreView({ model: this.model });
    }
 });
