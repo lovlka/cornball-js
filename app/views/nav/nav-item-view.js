@@ -13,8 +13,7 @@ module.exports = Chaplin.View.extend({
 
    navigate: function(event) {
       this.publishEvent('navigate', this.model.get('action'));
-      event.stopPropagation();
-      event.preventDefault();
+      return false;
    },
 
    getTemplateFunction: function() {

@@ -28,27 +28,25 @@ module.exports = Chaplin.Controller.extend({
 
       switch(action)
       {
-         case 'about':
-            this.showAbout();
+         case 'newgame':
+            this.publishEvent('game:new');
             break;
-         case 'statistics':
-            this.showStatistics();
+
+         case 'undo':
+            this.publishEvent('game:undo');
             break;
+
          case 'highscore':
-            this.showHighscore();
+            this.highscoreView = new HighscoreView({ model: this.model });
+            break;
+
+         case 'statistics':
+            this.statisticsView = new StatisticsView({ model: this.model });
+            break;
+
+         case 'about':
+            this.aboutView = new AboutView({ model: this.model });
             break;
       }
-   },
-
-   showAbout: function() {
-      this.aboutView = new AboutView({ model: this.model });
-   },
-
-   showStatistics: function() {
-      this.statisticsView = new StatisticsView({ model: this.model });
-   },
-
-   showHighscore: function() {
-      this.highscoreView = new HighscoreView({ model: this.model });
    }
 });
