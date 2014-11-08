@@ -23,7 +23,7 @@ module.exports = Chaplin.Controller.extend({
 
    newGame: function() {
       console.log('start a new game');
-      this.model = new GameModel();
+      this.model.set(this.model.defaults);
       this.deck.shuffle();
       this.view.render();
    },
