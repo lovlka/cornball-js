@@ -29,8 +29,6 @@ module.exports = Chaplin.Controller.extend({
    },
 
    navigate: function(action) {
-      console.log('navigate', action);
-
       switch(action)
       {
          case 'newgame':

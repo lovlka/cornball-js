@@ -1,1 +1,8 @@
-<p>Statistik</p>
+<table class="table table-striped">
+{{#each statistics.models}}
+   <tr>
+       <td>{{attributes.Name}}</td>
+       <td>{{attributes.Value}}</td>
+   </tr>
+{{/each}}
+</table>
