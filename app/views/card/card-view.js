@@ -17,6 +17,12 @@ module.exports = Chaplin.View.extend({
 
    render: function() {
       Chaplin.View.prototype.render.call(this, arguments);
-      this.$el.draggable({ revert: true });
+      var view = this;
+      this.$el.draggable({
+         revert: true,
+         stop: function() {
+            view.publishEvent('card:move', view);
+         }
+      });
    }
 });

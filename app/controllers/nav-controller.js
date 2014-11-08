@@ -5,8 +5,9 @@ var StatisticsView = require('views/statistics/statistics-view');
 var HighscoreView = require('views/highscore/highscore-view');
 
 module.exports = Chaplin.Controller.extend({
-   initialize: function () {
-      this.model = new Chaplin.Model({});
+   initialize: function (options) {
+      this.model = options.model;
+
       this.collection = new NavCollection([
          { action: 'newgame', text: 'Starta nytt spel', icon: 'refresh' },
          { action: 'undo', text: 'Ångra senaste drag', icon: 'reply' },
@@ -21,6 +22,7 @@ module.exports = Chaplin.Controller.extend({
       });
 
       this.subscribeEvent('navigate', this.navigate);
+      this.listenTo(this.model, 'change', this.propertyChanged);
    },
 
    navigate: function(action) {
@@ -48,5 +50,9 @@ module.exports = Chaplin.Controller.extend({
             this.aboutView = new AboutView({ model: this.model });
             break;
       }
+   },
+
+   propertyChanged: function() {
+
    }
 });

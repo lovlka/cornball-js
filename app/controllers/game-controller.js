@@ -1,9 +1,12 @@
+var NavController = require('controllers/nav-controller');
 var CardCollection = require('collections/card-collection');
 var DeckView = require('views/deck/deck-view');
+var GameModel = require('models/game');
 
 module.exports = Chaplin.Controller.extend({
    show: function (params) {
-      this.model = new Chaplin.Model({});
+      this.model = new GameModel();
+      this.nav = new NavController({ model: this.model });
 
       this.deck = new CardCollection();
       this.deck.shuffle();
@@ -20,15 +23,17 @@ module.exports = Chaplin.Controller.extend({
 
    newGame: function() {
       console.log('start a new game');
+      this.model = new GameModel();
       this.deck.shuffle();
       this.view.render();
    },
 
-   undoMode: function(schedule) {
+   undoMode: function() {
       console.log('undo the last move');
    },
 
-   cardMoved: function(schedule) {
+   cardMoved: function() {
       console.log('a card was moved');
+      this.model.set('moves', this.model.get('moves') + 1);
    }
 });

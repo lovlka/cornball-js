@@ -1,5 +1,4 @@
 var Application = require('application');
-var NavController = require('controllers/nav-controller');
 
 $(function () {
    require('mockjax');
@@ -10,7 +9,4 @@ $(function () {
          routes: require('routes')
       }
    );
-
-   new NavController();
-
 });
