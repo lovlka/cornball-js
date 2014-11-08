@@ -3,6 +3,7 @@ var NavCollection = require('collections/nav-collection');
 var AboutView = require('views/about/about-view');
 var StatisticsView = require('views/statistics/statistics-view');
 var HighscoreView = require('views/highscore/highscore-view');
+var ScoreView = require('views/nav/score-view');
 
 module.exports = Chaplin.Controller.extend({
    initialize: function (options) {
@@ -20,6 +21,8 @@ module.exports = Chaplin.Controller.extend({
          model: this.model,
          collection: this.collection
       });
+
+      this.scoreView = new ScoreView({ model: this.model });
 
       this.subscribeEvent('navigate', this.navigate);
       this.listenTo(this.model, 'change', this.propertyChanged);
@@ -53,6 +56,6 @@ module.exports = Chaplin.Controller.extend({
    },
 
    propertyChanged: function() {
-
+      this.scoreView.render();
    }
 });
