@@ -36,12 +36,22 @@ html, body {
   background: -moz-radial-gradient(center, #0a0, #050);
   background: radial-gradient(center, #0a0, #050);
 
-  #cards {
+  #deck {
     margin: 100px;
 
-    .card {
+    .card, .gap {
       float: left;
+      height: 97px;
+      width: 72px;
       margin: 5px;
+      overflow: hidden;
+
+      &.highlight {
+        border-radius: 4px;
+        background: rgba(0,0,0,0.2);
+      }
+    }
+    .card {
       cursor: pointer;
     }
   }

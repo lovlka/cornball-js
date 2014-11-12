@@ -18,14 +18,11 @@ module.exports = Chaplin.View.extend({
    },
 
    render: function() {
-      if(this.model.get('value') === 1) {
-         // render a blank for aces
-         return this;
-      }
-
       Chaplin.View.prototype.render.call(this, arguments);
-      var view = this;
+      this.initDrag();
+   },
 
+   initDrag: function() {
       interact(this.el)
          .draggable({
             onmove: _.bind(this.dragMove, this),
