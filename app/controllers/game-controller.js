@@ -34,6 +34,34 @@ module.exports = Chaplin.Controller.extend({
 
    cardMoved: function() {
       console.log('a card was moved');
+
       this.model.set('moves', this.model.get('moves') + 1);
+      this.model.set('score', this.getScore());
+   },
+
+   getScore: function() {
+      var score = 0;
+      var rounds = this.model.get('rounds');
+
+      _.each(this.deck.models, function(card) {
+         var value = card.get('value');
+         var roundPlaced = card.get('roundPlaced');
+
+         if (roundPlaced > 0) {
+            if (value === 13) {
+               score += (rounds - roundPlaced + 1) * 60;
+            }
+            if (value >= 10) {
+               score += (rounds - roundPlaced + 1) * 40;
+            }
+            else {
+               score += (rounds - roundPlaced + 1) * 20;
+            }
+         }
+      });
+
+      score -= (this.model.get('round') - 1) * 100;
+      score -= this.model.get('moves') * 5;
+      return score;
    }
 });
