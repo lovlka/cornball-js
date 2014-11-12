@@ -2,16 +2,16 @@ exports.config = {
    files: {
       javascripts: {
          joinTo: {
-            "javascripts/app.js": /^(bower_components|app)/
+            "javascripts/cornball.js": /^(bower_components|app)/
          }
       },
       stylesheets: {
          joinTo: {
-            'stylesheets/app.css': /^(bower_components|app)/
+            'stylesheets/cornball.css': /^(bower_components|app)/
          }
       },
       templates: {
-         joinTo: "javascripts/app.js"
+         joinTo: "javascripts/cornball.js"
       }
    },
    plugins: {
@@ -27,7 +27,7 @@ exports.config = {
       }
    },
    server: {
-      port: 666,
+      port: 8080,
       run: true
    }
 };
