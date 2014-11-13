@@ -10,6 +10,7 @@ module.exports = Chaplin.Controller.extend({
 
       this.deck = new CardCollection();
       this.deck.shuffle();
+      this.checkState();
 
       this.view = new DeckView({
          model: this.model,
@@ -49,6 +50,28 @@ module.exports = Chaplin.Controller.extend({
 
       console.log('check to see if all cards are places or if no moves are possible');
 
+      var locked = this.getLockedGaps();
+      console.log(locked + ' locked gaps');
+
+      if(locked === 4) {
+         console.log('all gaps locked, no more moves possible');
+      }
+   },
+
+   getLockedGaps: function() {
+      var locked = 0;
+      _.each(this.deck.models, function(card) {
+        if(card.get('value') === 1) {
+           var index = this.deck.models.indexOf(card);
+           if(index % 13 != 0) {
+              var previous = this.deck.models[index - 1].get('value');
+              if(previous === 13 || previous === 1) {
+                 locked++;
+              }
+           }
+        }
+      }, this);
+      return locked;
    },
 
    checkPlacedCards: function() {
