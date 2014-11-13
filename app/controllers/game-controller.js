@@ -17,7 +17,7 @@ module.exports = Chaplin.Controller.extend({
       });
 
       this.subscribeEvent('game:new', _.bind(this.newGame, this));
-      this.subscribeEvent('game:undo', _.bind(this.undoMode, this));
+      this.subscribeEvent('game:undo', _.bind(this.undoMove, this));
       this.subscribeEvent('card:move', _.bind(this.cardMoved, this));
    },
 
@@ -26,17 +26,56 @@ module.exports = Chaplin.Controller.extend({
       this.model.set(this.model.defaults);
       this.deck.shuffle();
       this.view.render();
+      this.checkState();
    },
 
-   undoMode: function() {
+   undoMove: function() {
       console.log('undo the last move');
+
+      this.model.set('moves', this.model.get('moves') + 1);
+      this.checkState();
    },
 
    cardMoved: function() {
       console.log('a card was moved');
 
       this.model.set('moves', this.model.get('moves') + 1);
+      this.checkState();
+   },
+
+   checkState: function() {
+      this.checkPlacedCards();
       this.model.set('score', this.getScore());
+
+      console.log('check to see if all cards are places or if no moves are possible');
+
+   },
+
+   checkPlacedCards: function() {
+      var suit = null;
+      for (var i = 0; i < this.deck.length; i++) {
+         var card = this.deck.models[i];
+         if (i % 13 == 0) {
+            if (card.get('value') == 2) {
+               this.setRoundPlaced(card);
+               suit = card.get('suit');
+            }
+         }
+         else if (card.get('suit') == suit && card.get('value') == ((i % 13) + 2)) {
+            this.setRoundPlaced(card);
+         }
+         else {
+            card.unset('roundPlaced');
+            suit = null;
+         }
+      }
+   },
+
+   setRoundPlaced: function(card) {
+      if (!card.has('roundPlaced')) {
+         card.set('roundPlaced', this.model.get('round'));
+      }
+      console.log('card placed in round ' + this.model.get('round') + ': ' + card.get('suit') + card.get('value'));
    },
 
    getScore: function() {
@@ -45,7 +84,7 @@ module.exports = Chaplin.Controller.extend({
 
       _.each(this.deck.models, function(card) {
          var value = card.get('value');
-         var roundPlaced = card.get('roundPlaced');
+         var roundPlaced = card.get('roundPlaced') || 0;
 
          if (roundPlaced > 0) {
             if (value === 13) {

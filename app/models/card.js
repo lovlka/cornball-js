@@ -1,6 +1,5 @@
 module.exports = Chaplin.Model.extend({
    defaults: {
-      roundPlaced: 0
    },
 
    initialize: function () {
