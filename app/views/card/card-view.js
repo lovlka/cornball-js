@@ -7,6 +7,8 @@ module.exports = Chaplin.View.extend({
    initialize: function() {
       this.template = require('views/card/card');
       Chaplin.View.prototype.initialize.call(this, arguments);
+
+      this.listenTo(this.model, 'change', this.propertyChanged, this);
    },
 
    getTemplateFunction: function() {
@@ -15,6 +17,10 @@ module.exports = Chaplin.View.extend({
 
    getTemplateData: function() {
       return this.model.attributes;
+   },
+
+   propertyChanged: function() {
+     this.$el.toggleClass('placed', this.model.has('roundPlaced'));
    },
 
    render: function() {

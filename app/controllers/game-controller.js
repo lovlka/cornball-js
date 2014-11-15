@@ -63,7 +63,7 @@ module.exports = Chaplin.Controller.extend({
       _.each(this.deck.models, function(card) {
         if(card.get('value') === 1) {
            var index = this.deck.models.indexOf(card);
-           if(index % 13 != 0) {
+           if(index % 13 !== 0) {
               var previous = this.deck.models[index - 1].get('value');
               if(previous === 13 || previous === 1) {
                  locked++;
@@ -78,13 +78,13 @@ module.exports = Chaplin.Controller.extend({
       var suit = null;
       for (var i = 0; i < this.deck.length; i++) {
          var card = this.deck.models[i];
-         if (i % 13 == 0) {
-            if (card.get('value') == 2) {
+         if (i % 13 === 0) {
+            if (card.get('value') === 2) {
                this.setRoundPlaced(card);
                suit = card.get('suit');
             }
          }
-         else if (card.get('suit') == suit && card.get('value') == ((i % 13) + 2)) {
+         else if (card.get('suit') == suit && card.get('value') === ((i % 13) + 2)) {
             this.setRoundPlaced(card);
          }
          else {
