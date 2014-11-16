@@ -37,8 +37,10 @@ module.exports = Chaplin.Controller.extend({
       this.checkState();
    },
 
-   cardMoved: function() {
-      console.log('a card was moved');
+   cardMoved: function(move) {
+      console.log('a card was moved', move.get('from'), move.get('to'));
+
+      this.deck.swap(move.get('from'), move.get('to'));
 
       this.model.set('moves', this.model.get('moves') + 1);
       this.checkState();

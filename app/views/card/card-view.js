@@ -1,3 +1,5 @@
+var Move = require('models/move');
+
 module.exports = Chaplin.View.extend({
    x: 0,
    y: 0,
@@ -44,8 +46,13 @@ module.exports = Chaplin.View.extend({
 
    dragEnd: function(event) {
       if(event.dropzone !== undefined) {
-         if(this.findGap() !== null) {
-            this.publishEvent('card:move', this);
+         var gap = this.findGap();
+
+         if(gap !== null) {
+            this.publishEvent('card:move', new Move({
+               from: this.model,
+               to: gap
+            }));
          }
       }
       this.dragReset(event);

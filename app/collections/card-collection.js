@@ -26,6 +26,13 @@ module.exports = Chaplin.Collection.extend({
       // todo: shuffle cards which are not in its correct position
    },
 
+   swap: function(from, to) {
+      var fromIndex = this.models.indexOf(from);
+      var toIndex = this.models.indexOf(to);
+
+      this._swap(fromIndex, toIndex);
+   },
+
    _swap: function(fromIndex, toIndex) {
       var temp = this.models[fromIndex];
       this.models[fromIndex] = this.models[toIndex];
