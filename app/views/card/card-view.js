@@ -43,8 +43,12 @@ module.exports = Chaplin.View.extend({
    },
 
    dragEnd: function(event) {
+      if(event.dropzone !== undefined) {
+         if(this.findGap() !== null) {
+            this.publishEvent('card:move', this);
+         }
+      }
       this.dragReset(event);
-      this.publishEvent('card:move', this);
    },
 
    dragReset: function(event) {
@@ -55,5 +59,22 @@ module.exports = Chaplin.View.extend({
 
    setPosition: function(event) {
       event.target.style.webkitTransform = event.target.style.transform = 'translate(' + this.x + 'px, ' + this.y + 'px)';
+   },
+
+   findGap: function() {
+      for (var i = 0; i < this.model.collection.length; i++) {
+         var gap = this.model.collection.models[i];
+
+         if(gap.get('value') === 1) {
+            if(i % 13 === 0) {
+               return gap;
+            }
+            var previous = this.model.collection.models[i - 1];
+            if(previous.get('suit') === this.model.get('suit') && previous.get('value') === this.model.get('value') - 1) {
+               return gap;
+            }
+         }
+      }
+      return null;
    }
 });
