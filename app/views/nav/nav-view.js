@@ -11,6 +11,16 @@ module.exports = Chaplin.CollectionView.extend({
    initialize: function () {
       this.template = require('views/nav/nav');
       Chaplin.CollectionView.prototype.initialize.call(this, arguments);
+
+      $.ajax({
+         dataType: 'json',
+         url: '/api/highscores/1',
+         success: _.bind(this.highscoreSuccess, this)
+      });
+   },
+
+   highscoreSuccess: function(data) {
+      this.$('#nav-highscore').text('Highscore: ' + data[0].value + ' (' + data[0].name + ' - ' + data[0].date + ')');
    },
 
    getTemplateFunction: function () {
