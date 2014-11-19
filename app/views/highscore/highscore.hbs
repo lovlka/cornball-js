@@ -1,1 +1,9 @@
-<p>High score</p>
+<table class="table table-striped">
+  {{#each highscores.models}}
+      <tr>
+          <td>{{attributes.name}}</td>
+          <td>{{attributes.date}}</td>
+          <td>{{attributes.value}}</td>
+      </tr>
+  {{/each}}
+</table>

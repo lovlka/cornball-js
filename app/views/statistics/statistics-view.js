@@ -17,13 +17,12 @@ module.exports = ModalView.extend({
       $.ajax({
          dataType: 'json',
          url: '/api/statistics',
-         success: _.bind(this.initializeSuccess, this)
+         success: _.bind(this.loadSuccess, this)
       });
    },
 
-   initializeSuccess: function(data) {
-      var statistics = new Chaplin.Collection(data);
-      this.model.set('statistics', statistics);
+   loadSuccess: function(data) {
+      this.model.set('statistics', new Chaplin.Collection(data));
       this.renderContent();
    }
 });
