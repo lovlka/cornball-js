@@ -21,11 +21,24 @@ module.exports = Chaplin.View.extend({
 
    render: function() {
       Chaplin.View.prototype.render.call(this, arguments);
-
-      this.$('.modal-title').text(this.title);
-      this.$('.modal-body').html(this.bodyTemplate(this.model.attributes));
+      this.renderContent();
 
       this.delegate('hidden.bs.modal', this.dispose);
       this.$el.modal('show');
+   },
+
+   showSpinner: function() {
+      var options = { lines: 9, length: 6, width: 2, radius: 6, color: '#777' };
+      var target = this.$('.modal-body').get(0);
+      this.spinner = new Spinner(options).spin(target);
+   },
+
+   renderContent: function() {
+      if(this.spinner !== undefined) {
+         this.spinner.stop();
+      }
+
+      this.$('.modal-title').text(this.title);
+      this.$('.modal-body').html(this.bodyTemplate(this.model.attributes));
    }
 });

@@ -40,15 +40,15 @@ module.exports = Chaplin.Controller.extend({
             break;
 
          case 'highscore':
-            this.highscoreView = new HighscoreView({ model: this.model });
+            this.highscoreView = new HighscoreView({ model: new Chaplin.Model() });
             break;
 
          case 'statistics':
-            this.statisticsView = new StatisticsView({ model: this.model });
+            this.statisticsView = new StatisticsView({ model: new Chaplin.Model() });
             break;
 
          case 'about':
-            this.aboutView = new AboutView({ model: this.model });
+            this.aboutView = new AboutView({ model: new Chaplin.Model() });
             break;
       }
    },
