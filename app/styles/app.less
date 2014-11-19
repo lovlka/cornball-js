@@ -19,18 +19,27 @@ html, body {
 #nav-region {
   .noselect();
   .navbar {
-    li span.glyphicon {
-      font-size: 24px;
-      font-weight: bold;
-    }
     p {
       color: #fff;
       margin: 18px;
       text-shadow: 0 0 5px #000;
-
       span {
         margin-left: 20px;
       }
+    }
+    li {
+      float: left;
+    }
+    .navbar-nav {
+      margin: 0;
+      float: left;
+      li > a {
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+    }
+    .navbar-right {
+      float: right;
     }
   }
 }
@@ -43,6 +52,7 @@ html, body {
   right: 0;
   bottom: 0;
   z-index: 1;
+  overflow: auto;
   background: -webkit-radial-gradient(center, #0a0, #050);
   background: -o-radial-gradient(center, #0a0, #050);
   background: -moz-radial-gradient(center, #0a0, #050);
@@ -68,7 +78,7 @@ html, body {
 
       &.highlight {
         border-radius: 4px;
-        background: rgba(0,0,0,0.2);
+        background: rgba(0, 0, 0, 0.2);
       }
     }
     .card {
