@@ -8,7 +8,7 @@ $(function () {
 
    $.mockjax({
        url: '/api/highscores/1',
-       responseTime: 100,
+       responseTime: 1000,
        responseText: [
           {name: 'Victor', date: '2014-01-27', value: 6425}
        ]

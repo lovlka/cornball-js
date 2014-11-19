@@ -1,7 +1,7 @@
 {
-   "name": "example-app",
+   "name": "cornball-js",
    "version": "0.1.0",
-   "main": "public/javascripts/app.js",
+   "main": "public/javascripts/cornball.js",
    "dependencies": {
       "chaplin": "~1.0.0",
       "console-polyfill": "~0.1.0",
@@ -11,7 +11,8 @@
       "momentjs": "~2.6.0",
       "bootstrap": "3.2.0",
       "font-awesome": "4.2.0",
-      "interact": "1.1.2"
+      "interact": "1.1.2",
+      "spin.js": "2.0.1"
    },
    "overrides": {
       "backbone": {
