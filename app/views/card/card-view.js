@@ -35,7 +35,8 @@ module.exports = Chaplin.View.extend({
          .draggable({
             onmove: _.bind(this.dragMove, this),
             onend: _.bind(this.dragEnd, this)
-         });
+         })
+         .on('doubletap', _.bind(this.doubleTap, this));
    },
 
    dragMove: function(event) {
@@ -66,6 +67,20 @@ module.exports = Chaplin.View.extend({
 
    setPosition: function(event) {
       event.target.style.webkitTransform = event.target.style.transform = 'translate(' + this.x + 'px, ' + this.y + 'px)';
+   },
+
+   doubleTap: function() {
+      var gap = this.findGap();
+
+      if(gap !== null) {
+         this.publishEvent('card:move', new Move({
+            from: this.model,
+            to: gap
+         }));
+      }
+      else {
+         console.log('illegal double tap move!');
+      }
    },
 
    findGap: function() {
