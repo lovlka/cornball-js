@@ -37,7 +37,8 @@ module.exports = Chaplin.View.extend({
          dragenter: _.bind(this.highlightGap, this),
          dragleave: _.bind(this.unhighlightGap, this),
          drop: _.bind(this.cardDrop, this)
-      });
+      })
+      .on('tap', _.bind(this.tap, this));
    },
 
    highlightGap: function(event) {
@@ -51,5 +52,9 @@ module.exports = Chaplin.View.extend({
    cardDrop: function(event) {
       console.log('dropped in a drag zone!');
       this.unhighlightGap(event);
+   },
+
+   tap: function(event) {
+      this.publishEvent('card:findGap', this.model);
    }
 });

@@ -20,6 +20,7 @@ module.exports = Chaplin.Controller.extend({
       this.subscribeEvent('game:new', _.bind(this.newGame, this));
       this.subscribeEvent('game:undo', _.bind(this.undoMove, this));
       this.subscribeEvent('card:move', _.bind(this.cardMoved, this));
+      this.subscribeEvent('card:findGap', _.bind(this.findGap, this));
    },
 
    newGame: function() {
@@ -59,6 +60,10 @@ module.exports = Chaplin.Controller.extend({
       if(locked === 4) {
          console.log('all gaps locked, no more moves possible');
       }
+   },
+
+   findGap: function(card) {
+      console.log('find gap for card', card);
    },
 
    getLockedGaps: function() {
