@@ -5,6 +5,17 @@ module.exports = Chaplin.View.extend({
    initialize: function() {
       this.template = require('views/gap/gap');
       Chaplin.View.prototype.initialize.call(this, arguments);
+
+      this.listenTo(this.model, 'change:positionY', this.setPositionY, this);
+      this.listenTo(this.model, 'change:positionX', this.setPositionX, this);
+   },
+
+   setPositionY: function() {
+      this.$el.css({ top: this.model.get('positionY') + 'px' });
+   },
+
+   setPositionX: function() {
+      this.$el.css({ left: this.model.get('positionX') + 'px' });
    },
 
    getTemplateFunction: function() {

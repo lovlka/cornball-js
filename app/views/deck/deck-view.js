@@ -19,6 +19,25 @@ module.exports = Chaplin.CollectionView.extend({
       return new CardView({model: model});
    },
 
+   setPositions: function() {
+      for (var row = 1; row <= 4; row++) {
+         for (var column = 1; column <= 13; column++) {
+            var card = this.collection.models[((row - 1) * 13) + column - 1];
+
+            var x = (column - 1) * (72 + 10);
+            var y = (row - 1) * (97 + 10);
+
+            card.set('positionX', x);
+            card.set('positionY', y);
+         }
+      }
+   },
+
+   render: function() {
+      Chaplin.CollectionView.prototype.render.call(this, arguments);
+      this.setPositions();
+   },
+
    getTemplateFunction: function() {
       return this.template;
    },

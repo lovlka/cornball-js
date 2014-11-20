@@ -1,8 +1,8 @@
 var Move = require('models/move');
 
 module.exports = Chaplin.View.extend({
-   x: 0,
-   y: 0,
+   dragX: 0,
+   dragY: 0,
    noWrap: true,
    autoRender: true,
 
@@ -10,7 +10,9 @@ module.exports = Chaplin.View.extend({
       this.template = require('views/card/card');
       Chaplin.View.prototype.initialize.call(this, arguments);
 
-      this.listenTo(this.model, 'change', this.propertyChanged, this);
+      this.listenTo(this.model, 'change:roundPlaced', this.setRoundPlaced, this);
+      this.listenTo(this.model, 'change:positionY', this.setPositionY, this);
+      this.listenTo(this.model, 'change:positionX', this.setPositionX, this);
    },
 
    getTemplateFunction: function() {
@@ -21,8 +23,16 @@ module.exports = Chaplin.View.extend({
       return this.model.attributes;
    },
 
-   propertyChanged: function() {
-     this.$el.toggleClass('placed', this.model.has('roundPlaced'));
+   setRoundPlaced: function() {
+      this.$el.toggleClass('placed', this.model.has('roundPlaced'));
+   },
+
+   setPositionY: function() {
+      this.$el.css({ top: this.model.get('positionY') + 'px' });
+   },
+
+   setPositionX: function() {
+      this.$el.css({ left: this.model.get('positionX') + 'px' });
    },
 
    render: function() {
@@ -40,8 +50,8 @@ module.exports = Chaplin.View.extend({
    },
 
    dragMove: function(event) {
-      this.x += event.dx;
-      this.y += event.dy;
+      this.dragX += event.dx;
+      this.dragY += event.dy;
       this.setPosition(event);
    },
 
@@ -60,13 +70,13 @@ module.exports = Chaplin.View.extend({
    },
 
    dragReset: function(event) {
-      this.x = 0;
-      this.y = 0;
+      this.dragX = 0;
+      this.dragY = 0;
       this.setPosition(event);
    },
 
    setPosition: function(event) {
-      event.target.style.webkitTransform = event.target.style.transform = 'translate(' + this.x + 'px, ' + this.y + 'px)';
+      event.target.style.webkitTransform = event.target.style.transform = 'translate(' + this.dragX + 'px, ' + this.dragY + 'px)';
    },
 
    doubleTap: function() {

@@ -67,14 +67,18 @@ html, body {
   }
 
   #deck {
-    margin: 100px;
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    right: 50px;
+    bottom: 50px;
 
     .card, .gap {
-      float: left;
+      position: absolute;
+      overflow: hidden;
       height: 97px;
       width: 72px;
       margin: 5px;
-      overflow: hidden;
 
       &.highlight {
         border-radius: 4px;
