@@ -1,28 +1,28 @@
 var ModalView = require('views/modal/modal-view');
+var HighscoreCollection = require('collections/highscore-collection');
 
 module.exports = ModalView.extend({
    initialize: function (options) {
       this.title = "Topplista";
       this.bodyTemplate = require('views/highscore/highscore');
+      this.highscores = new HighscoreCollection();
       ModalView.prototype.initialize.call(this, arguments);
    },
 
    render: function () {
       ModalView.prototype.render.call(this, arguments);
-      this.loadHighScore();
+      this.fetchHighScore();
    },
 
-   loadHighScore: function() {
+   fetchHighScore: function() {
       this.showSpinner();
-      $.ajax({
-         dataType: 'json',
-         url: '/api/highscores/10',
-         success: _.bind(this.loadSuccess, this)
+      this.highscores.fetch({
+         success: _.bind(this.fetchSuccess, this)
       });
    },
 
-   loadSuccess: function(data) {
-      this.model.set('highscores', new Chaplin.Collection(data));
+   fetchSuccess: function() {
+      this.model.set('highscores', this.highscores);
       this.renderContent();
    }
 });

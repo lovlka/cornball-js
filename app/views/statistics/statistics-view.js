@@ -1,28 +1,28 @@
 var ModalView = require('views/modal/modal-view');
+var StatisticsCollection = require('collections/statistics-collection');
 
 module.exports = ModalView.extend({
    initialize: function (options) {
       this.title = "Statistik";
       this.bodyTemplate = require('views/statistics/statistics');
+      this.statistics = new StatisticsCollection();
       ModalView.prototype.initialize.call(this, arguments);
    },
 
    render: function () {
       ModalView.prototype.render.call(this, arguments);
-      this.loadStatistics();
+      this.fetchStatistics();
    },
 
-   loadStatistics: function() {
+   fetchStatistics: function() {
       this.showSpinner();
-      $.ajax({
-         dataType: 'json',
-         url: '/api/statistics',
-         success: _.bind(this.loadSuccess, this)
+      this.statistics.fetch({
+         success: _.bind(this.fetchSuccess, this)
       });
    },
 
-   loadSuccess: function(data) {
-      this.model.set('statistics', new Chaplin.Collection(data));
+   fetchSuccess: function() {
+      this.model.set('statistics', this.statistics);
       this.renderContent();
    }
 });
