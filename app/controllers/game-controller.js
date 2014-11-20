@@ -2,6 +2,7 @@ var NavController = require('controllers/nav-controller');
 var CardCollection = require('collections/card-collection');
 var DeckView = require('views/deck/deck-view');
 var GameModel = require('models/game');
+var Move = require('models/move');
 
 module.exports = Chaplin.Controller.extend({
    show: function (params) {
@@ -34,8 +35,15 @@ module.exports = Chaplin.Controller.extend({
    undoMove: function() {
       console.log('undo the last move');
 
-      this.model.set('moves', this.model.get('moves') + 1);
-      this.checkState();
+      if(this.lastMove === undefined) {
+         return;
+      }
+
+      var move = new Move({
+         from: this.lastMove.get('to'),
+         to: this.lastMove.get('from')
+      });
+      this.cardMoved(move);
    },
 
    cardMoved: function(move) {
@@ -43,6 +51,7 @@ module.exports = Chaplin.Controller.extend({
 
       this.deck.swap(move.get('from'), move.get('to'));
       this.view.setPositions();
+      this.lastMove = move;
 
       this.model.set('moves', this.model.get('moves') + 1);
       this.checkState();
