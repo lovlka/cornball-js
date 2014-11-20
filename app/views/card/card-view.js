@@ -25,10 +25,6 @@ module.exports = Chaplin.View.extend({
 
    setRoundPlaced: function() {
       this.$el.toggleClass('placed', this.model.has('roundPlaced'));
-
-      if(this.model.has('roundPlaced')) {
-         this.interactable.unset();
-      }
    },
 
    setPositionY: function() {
@@ -45,12 +41,17 @@ module.exports = Chaplin.View.extend({
    },
 
    initDrag: function() {
-      this.interactable = interact(this.el)
+      interact(this.el)
          .draggable({
+            onstart: _.bind(this.dragStart, this),
             onmove: _.bind(this.dragMove, this),
             onend: _.bind(this.dragEnd, this)
          })
          .on('doubletap', _.bind(this.doubleTap, this));
+   },
+
+   dragStart: function(event) {
+      this.$el.css('z-index', 10);
    },
 
    dragMove: function(event) {
@@ -77,6 +78,7 @@ module.exports = Chaplin.View.extend({
       this.dragX = 0;
       this.dragY = 0;
       this.setPosition(event);
+      this.$el.css('z-index', 1);
    },
 
    setPosition: function(event) {
@@ -93,9 +95,7 @@ module.exports = Chaplin.View.extend({
          }));
       }
       else {
-         var element = this.$el;
-         element.addClass('error');
-         setTimeout(function() { element.removeClass('error'); }, 300);
+         this.flashError();
       }
    },
 
@@ -104,7 +104,7 @@ module.exports = Chaplin.View.extend({
          var gap = this.model.collection.models[i];
 
          if(gap.get('value') === 1) {
-            if(i % 13 === 0) {
+            if(i % 13 === 0 && this.model.get('value') === 2) {
                return gap;
             }
             var previous = this.model.collection.models[i - 1];
@@ -116,7 +116,17 @@ module.exports = Chaplin.View.extend({
       return null;
    },
 
+   flashError: function() {
+      var element = this.$el;
+      setTimeout(function() { element.addClass('error'); }, 0);
+      setTimeout(function() { element.removeClass('error'); }, 100);
+      setTimeout(function() { element.addClass('error'); }, 200);
+      setTimeout(function() { element.removeClass('error'); }, 300);
+   },
+
    isCorrectGap: function(dropzone, gap) {
+
       console.log(dropzone, gap);
+      return true;
    }
 });
