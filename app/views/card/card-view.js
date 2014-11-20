@@ -25,6 +25,10 @@ module.exports = Chaplin.View.extend({
 
    setRoundPlaced: function() {
       this.$el.toggleClass('placed', this.model.has('roundPlaced'));
+
+      if(this.model.has('roundPlaced')) {
+         this.interactable.unset();
+      }
    },
 
    setPositionY: function() {
@@ -41,7 +45,7 @@ module.exports = Chaplin.View.extend({
    },
 
    initDrag: function() {
-      interact(this.el)
+      this.interactable = interact(this.el)
          .draggable({
             onmove: _.bind(this.dragMove, this),
             onend: _.bind(this.dragEnd, this)
@@ -59,7 +63,7 @@ module.exports = Chaplin.View.extend({
       if(event.dropzone !== undefined) {
          var gap = this.findGap();
 
-         if(gap !== null) {
+         if(gap !== null && this.isCorrectGap(event.dropzone, gap)) {
             this.publishEvent('card:move', new Move({
                from: this.model,
                to: gap
@@ -89,7 +93,9 @@ module.exports = Chaplin.View.extend({
          }));
       }
       else {
-         console.log('illegal double tap move!');
+         var element = this.$el;
+         element.addClass('error');
+         setTimeout(function() { element.removeClass('error'); }, 300);
       }
    },
 
@@ -108,5 +114,9 @@ module.exports = Chaplin.View.extend({
          }
       }
       return null;
+   },
+
+   isCorrectGap: function(dropzone, gap) {
+      console.log(dropzone, gap);
    }
 });

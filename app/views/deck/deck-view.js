@@ -5,6 +5,7 @@ module.exports = Chaplin.CollectionView.extend({
    noWrap: true,
    autoRender: true,
    container: '#main-region',
+   containerMethod: 'html',
    animationDuration: 0,
 
    initialize: function() {
