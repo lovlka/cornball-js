@@ -18,8 +18,10 @@ module.exports = Chaplin.Controller.extend({
 
       this.subscribeEvent('game:new', _.bind(this.newGame, this));
       this.subscribeEvent('game:undo', _.bind(this.undoMove, this));
-      this.subscribeEvent('card:move', _.bind(this.cardMoved, this));
-      this.subscribeEvent('hint:find', _.bind(this.findCard, this));
+      this.subscribeEvent('card:dragged', _.bind(this.cardDragged, this));
+      this.subscribeEvent('card:dropped', _.bind(this.cardDropped, this));
+      this.subscribeEvent('card:find', _.bind(this.findCard, this));
+      this.subscribeEvent('card:move', _.bind(this.findGap, this));
 
       this.newGame();
    },
@@ -32,16 +34,27 @@ module.exports = Chaplin.Controller.extend({
 
    undoMove: function() {
       if(this.lastMove === undefined) {
-         return;
+         this.moveCard(new Move({
+            from: this.lastMove.get('to'),
+            to: this.lastMove.get('from')
+         }));
       }
-      var move = new Move({
-         from: this.lastMove.get('to'),
-         to: this.lastMove.get('from')
-      });
-      this.cardMoved(move);
    },
 
-   cardMoved: function(move) {
+   cardDragged: function(card) {
+      this.card = card;
+   },
+
+   cardDropped: function(gap) {
+      if(this.isCorrectGap(gap, this.card)) {
+         this.moveCard(new Move({
+            from: this.card,
+            to: gap
+         }));
+      }
+   },
+
+   moveCard: function(move) {
       this.deck.swap(move.get('from'), move.get('to'));
       this.lastMove = move;
 
@@ -68,17 +81,45 @@ module.exports = Chaplin.Controller.extend({
    },
 
    findCard: function(gap) {
+      _.each(this.deck.models, function(card) {
+         if(this.isCorrectGap(gap, card)) {
+            card.trigger('flash:hint');
+         }
+      }, this);
+   },
+
+   findGap: function(card) {
+      var foundGap = null;
+      _.each(this.deck.models, function(gap) {
+         if(this.isCorrectGap(gap, card)) {
+            foundGap = gap;
+         }
+      }, this);
+
+      if(foundGap !== null) {
+         this.moveCard(new Move({
+            from: card,
+            to: foundGap
+         }));
+      }
+      else {
+         card.trigger('flash:error');
+      }
+   },
+
+   isCorrectGap: function(gap, card) {
       var index = this.deck.models.indexOf(gap);
       var previous = index > 0 ? this.deck.models[index - 1] : null;
 
-      _.each(this.deck.models, function(card) {
+      if(gap.get('value') === 1) {
          if(index % 13 === 0 && card.get('value') === 2) {
-            card.trigger('hint:flash');
+            return true;
          }
          else if(index % 13 !== 0 && previous !== null && card.get('suit') == previous.get('suit') && card.get('value') == previous.get('value') + 1) {
-            card.trigger('hint:flash');
+            return true
          }
-      }, this);
+      }
+      return false;
    },
 
    getLockedGaps: function() {
@@ -121,7 +162,6 @@ module.exports = Chaplin.Controller.extend({
       if (!card.has('roundPlaced')) {
          card.set('roundPlaced', this.model.get('round'));
       }
-      console.log('card placed in round ' + this.model.get('round') + ': ' + card.get('suit') + card.get('value'));
    },
 
    getScore: function() {

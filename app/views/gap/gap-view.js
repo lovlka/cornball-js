@@ -53,11 +53,11 @@ module.exports = Chaplin.View.extend({
    },
 
    cardDrop: function(event) {
-      console.log('dropped in a drag zone!');
+      this.publishEvent('card:dropped', this.model);
       this.unhighlightGap(event);
    },
 
    tap: function(event) {
-      this.publishEvent('hint:find', this.model);
+      this.publishEvent('card:find', this.model);
    }
 });

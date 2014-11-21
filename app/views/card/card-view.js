@@ -12,7 +12,8 @@ module.exports = Chaplin.View.extend({
 
       this.listenTo(this.model, 'change:roundPlaced', this.setRoundPlaced, this);
       this.listenTo(this.model, 'change:position', this.setPosition, this);
-      this.listenTo(this.model, 'hint:flash', this.flashHint, this);
+      this.listenTo(this.model, 'flash:error', this.flashError, this);
+      this.listenTo(this.model, 'flash:hint', this.flashHint, this);
    },
 
    getTemplateFunction: function() {
@@ -55,6 +56,7 @@ module.exports = Chaplin.View.extend({
    },
 
    dragStart: function(event) {
+      this.publishEvent('card:dragged', this.model);
       this.$el.css('z-index', 10);
    },
 
@@ -65,15 +67,8 @@ module.exports = Chaplin.View.extend({
    },
 
    dragEnd: function(event) {
-      if(event.dropzone !== undefined) {
-         var gap = this.findGap();
-
-         if(gap !== null && this.isCorrectGap(event.dropzone, gap)) {
-            this.publishEvent('card:move', new Move({
-               from: this.model,
-               to: gap
-            }));
-         }
+      if(event.dropzone === undefined) {
+         this.publishEvent('card:dragged', null);
       }
       this.dragReset(event);
    },
@@ -90,34 +85,7 @@ module.exports = Chaplin.View.extend({
    },
 
    doubleTap: function() {
-      var gap = this.findGap();
-
-      if(gap !== null) {
-         this.publishEvent('card:move', new Move({
-            from: this.model,
-            to: gap
-         }));
-      }
-      else {
-         this.flashError();
-      }
-   },
-
-   findGap: function() {
-      for (var i = 0; i < this.model.collection.length; i++) {
-         var gap = this.model.collection.models[i];
-
-         if(gap.get('value') === 1) {
-            if(i % 13 === 0 && this.model.get('value') === 2) {
-               return gap;
-            }
-            var previous = i > 0 ? this.model.collection.models[i - 1] : null;
-            if(previous !== null && previous.get('suit') === this.model.get('suit') && previous.get('value') === this.model.get('value') - 1) {
-               return gap;
-            }
-         }
-      }
-      return null;
+      this.publishEvent('card:move', this.model);
    },
 
    flashError: function() {
@@ -134,10 +102,5 @@ module.exports = Chaplin.View.extend({
       setTimeout(function() { element.removeClass('hint'); }, 100);
       setTimeout(function() { element.addClass('hint'); }, 200);
       setTimeout(function() { element.removeClass('hint'); }, 1000);
-   },
-
-   isCorrectGap: function(dropzone, gap) {
-      console.log(dropzone, gap);
-      return true;
    }
 });
