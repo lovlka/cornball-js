@@ -1,6 +1,7 @@
 var NavController = require('controllers/nav-controller');
 var CardCollection = require('collections/card-collection');
 var DeckView = require('views/deck/deck-view');
+var GameOverView = require('views/gameover/gameover-view');
 var GameModel = require('models/game');
 var Move = require('models/move');
 
@@ -29,6 +30,12 @@ module.exports = Chaplin.Controller.extend({
    newGame: function() {
       this.model.set(this.model.defaults);
       this.deck.shuffle();
+      this.checkState();
+   },
+
+   newRound: function() {
+      this.model.set('round', this.model.get('round') + 1);
+      this.deck.reShuffle();
       this.checkState();
    },
 
@@ -69,10 +76,10 @@ module.exports = Chaplin.Controller.extend({
       var locked = this.getLockedGaps();
       if(locked === 4) {
          if(this.model.get('round') < this.model.get('rounds')) {
-            console.log('round over!');
-            this.model.set('round', this.model.get('round') + 1);
-            this.deck.reShuffle();
-            this.checkPlacedCards();
+            this.gameOverView = new GameOverView({
+               model: this.model,
+               closed: _.bind(this.newRound, this)
+            });
          }
          else {
             console.log('game over!');
@@ -111,11 +118,16 @@ module.exports = Chaplin.Controller.extend({
       var index = this.deck.models.indexOf(gap);
       var previous = index > 0 ? this.deck.models[index - 1] : null;
 
+      var isGapFirstInRow = index % 13 === 0;
+      var isCardValueTwo = card.get('value') === 2;
+      var isSuitMatch = previous !== null && card.get('suit') == previous.get('suit');
+      var isValueMatch = previous !== null && card.get('value') == previous.get('value') + 1;
+
       if(gap.get('value') === 1) {
-         if(index % 13 === 0 && card.get('value') === 2) {
+         if(isGapFirstInRow && isCardValueTwo) {
             return true;
          }
-         else if(index % 13 !== 0 && previous !== null && card.get('suit') == previous.get('suit') && card.get('value') == previous.get('value') + 1) {
+         else if(!isGapFirstInRow && !isCardValueTwo && isSuitMatch && isValueMatch) {
             return true
          }
       }

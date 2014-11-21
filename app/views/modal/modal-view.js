@@ -4,7 +4,7 @@ module.exports = Chaplin.View.extend({
    container: 'body',
    containerMethod: 'append',
 
-   optionNames: Chaplin.View.prototype.optionNames.concat(['title', 'bodyTemplate']),
+   optionNames: Chaplin.View.prototype.optionNames.concat(['title', 'bodyTemplate', 'closed']),
 
    initialize: function(options) {
       this.template = require('views/modal/modal');
@@ -23,8 +23,15 @@ module.exports = Chaplin.View.extend({
       Chaplin.View.prototype.render.call(this, arguments);
       this.renderContent();
 
-      this.delegate('hidden.bs.modal', this.dispose);
+      this.delegate('hidden.bs.modal', _.bind(this.hidden, this));
       this.$el.modal('show');
+   },
+
+   hidden: function() {
+      if(_.isFunction(this.closed)) {
+         this.closed();
+      }
+      this.dispose();
    },
 
    showSpinner: function() {
