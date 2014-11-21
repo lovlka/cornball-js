@@ -1,4 +1,5 @@
 var NavItemView = require('views/nav/nav-item-view');
+var Highscore = require('models/highscore');
 
 module.exports = Chaplin.CollectionView.extend({
    noWrap: true,
@@ -9,25 +10,24 @@ module.exports = Chaplin.CollectionView.extend({
    animationDuration: 0,
 
    initialize: function () {
+      this.highscore = new Highscore();
       this.template = require('views/nav/nav');
       Chaplin.CollectionView.prototype.initialize.call(this, arguments);
    },
 
-   getHighScore: function() {
-      var options = { lines: 9, length: 4, width: 2, radius: 5, color: '#eee' };
+   fetchHighscore: function() {
       var target = this.$('#nav-highscore').get(0);
+      var options = { lines: 9, length: 4, width: 2, radius: 5, color: '#eee' };
       this.spinner = new Spinner(options).spin(target);
-
-      $.ajax({
-         dataType: 'json',
-         url: '/api/highscores/1',
-         success: _.bind(this.highScoreSuccess, this)
+      this.highscore.fetch({
+         success: _.bind(this.fetchSuccess, this)
       });
    },
 
-   highScoreSuccess: function(data) {
+   fetchSuccess: function() {
       this.spinner.stop();
-      this.$('#nav-highscore').text('Highscore: ' + data[0].value + ' (' + data[0].name + ' - ' + data[0].date + ')');
+      var date = moment(this.highscore.get('date'));
+      this.$('#nav-highscore').text('Bäst i ' + date.format('MMMM') + ': ' + this.highscore.get('name') + ' (' + this.highscore.get('value') + ')');
    },
 
    getTemplateFunction: function () {
@@ -40,6 +40,6 @@ module.exports = Chaplin.CollectionView.extend({
 
    render: function () {
       Chaplin.CollectionView.prototype.render.call(this, arguments);
-      this.getHighScore();
+      this.fetchHighscore();
    }
 });

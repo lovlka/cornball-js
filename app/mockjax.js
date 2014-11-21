@@ -7,11 +7,9 @@ $(function () {
    });
 
    $.mockjax({
-       url: '/api/highscores/1',
+       url: '/api/highscore',
        responseTime: 1000,
-       responseText: [
-          {name: 'Victor', date: '2014-01-27', value: 6425}
-       ]
+       responseText: {name: 'Victor', date: '2014-01-27', value: 6425}
    });
 
    $.mockjax({
