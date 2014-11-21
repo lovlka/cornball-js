@@ -21,7 +21,7 @@ module.exports = Chaplin.Controller.extend({
       this.subscribeEvent('game:new', _.bind(this.newGame, this));
       this.subscribeEvent('game:undo', _.bind(this.undoMove, this));
       this.subscribeEvent('card:move', _.bind(this.cardMoved, this));
-      this.subscribeEvent('card:findGap', _.bind(this.findGap, this));
+      this.subscribeEvent('hint:find', _.bind(this.findCard, this));
    },
 
    newGame: function() {
@@ -33,12 +33,9 @@ module.exports = Chaplin.Controller.extend({
    },
 
    undoMove: function() {
-      console.log('undo the last move');
-
       if(this.lastMove === undefined) {
          return;
       }
-
       var move = new Move({
          from: this.lastMove.get('to'),
          to: this.lastMove.get('from')
@@ -47,8 +44,6 @@ module.exports = Chaplin.Controller.extend({
    },
 
    cardMoved: function(move) {
-      console.log('a card was moved', move.get('from'), move.get('to'));
-
       this.deck.swap(move.get('from'), move.get('to'));
       this.lastMove = move;
 
@@ -70,8 +65,18 @@ module.exports = Chaplin.Controller.extend({
       }
    },
 
-   findGap: function(card) {
-      console.log('find gap for card', card);
+   findCard: function(gap) {
+      var index = this.deck.models.indexOf(gap);
+      var previous = index > 0 ? this.deck.models[index - 1] : null;
+
+      _.each(this.deck.models, function(card) {
+         if(index % 13 === 0 && card.get('value') === 2) {
+            card.trigger('hint:flash');
+         }
+         else if(index % 13 !== 0 && previous !== null && card.get('suit') == previous.get('suit') && card.get('value') == previous.get('value') + 1) {
+            card.trigger('hint:flash');
+         }
+      }, this);
    },
 
    getLockedGaps: function() {

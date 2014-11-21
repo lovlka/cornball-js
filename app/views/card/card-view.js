@@ -12,6 +12,7 @@ module.exports = Chaplin.View.extend({
 
       this.listenTo(this.model, 'change:roundPlaced', this.setRoundPlaced, this);
       this.listenTo(this.model, 'change:position', this.setPosition, this);
+      this.listenTo(this.model, 'hint:flash', this.flashHint, this);
    },
 
    getTemplateFunction: function() {
@@ -125,6 +126,14 @@ module.exports = Chaplin.View.extend({
       setTimeout(function() { element.removeClass('error'); }, 100);
       setTimeout(function() { element.addClass('error'); }, 200);
       setTimeout(function() { element.removeClass('error'); }, 300);
+   },
+
+   flashHint: function() {
+      var element = this.$el;
+      setTimeout(function() { element.addClass('hint'); }, 0);
+      setTimeout(function() { element.removeClass('hint'); }, 100);
+      setTimeout(function() { element.addClass('hint'); }, 200);
+      setTimeout(function() { element.removeClass('hint'); }, 1000);
    },
 
    isCorrectGap: function(dropzone, gap) {

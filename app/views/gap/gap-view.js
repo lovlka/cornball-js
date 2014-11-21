@@ -58,6 +58,6 @@ module.exports = Chaplin.View.extend({
    },
 
    tap: function(event) {
-      this.publishEvent('card:findGap', this.model);
+      this.publishEvent('hint:find', this.model);
    }
 });
