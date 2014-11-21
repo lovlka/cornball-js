@@ -111,8 +111,8 @@ module.exports = Chaplin.View.extend({
             if(i % 13 === 0 && this.model.get('value') === 2) {
                return gap;
             }
-            var previous = this.model.collection.models[i - 1];
-            if(previous.get('suit') === this.model.get('suit') && previous.get('value') === this.model.get('value') - 1) {
+            var previous = i > 0 ? this.model.collection.models[i - 1] : null;
+            if(previous !== null && previous.get('suit') === this.model.get('suit') && previous.get('value') === this.model.get('value') - 1) {
                return gap;
             }
          }

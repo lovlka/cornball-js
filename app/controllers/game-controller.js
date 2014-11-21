@@ -59,6 +59,7 @@ module.exports = Chaplin.Controller.extend({
             console.log('round over!');
             this.model.set('round', this.model.get('round') + 1);
             this.deck.reShuffle();
+            this.checkPlacedCards();
          }
          else {
             console.log('game over!');

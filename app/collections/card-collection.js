@@ -32,7 +32,7 @@ module.exports = Chaplin.Collection.extend({
       }
       for (var index = shuffle.length - 1; index >= 0; index--) {
          var random = Math.floor((Math.random() * index));
-         this._swap(random, shuffle[index]);
+         this._swap(shuffle[random], shuffle[index]);
       }
       this._triggerChange();
    },
