@@ -5,6 +5,10 @@
 
 html, body {
   height: 100%;
+  background: -webkit-radial-gradient(center, #0a0, #050);
+  background: -o-radial-gradient(center, #0a0, #050);
+  background: -moz-radial-gradient(center, #0a0, #050);
+  background: radial-gradient(center, #0a0, #050);
 }
 
 .noselect {
@@ -14,107 +18,6 @@ html, body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-#nav-region {
-  .noselect();
-  .navbar {
-    p {
-      color: #fff;
-      margin: 18px;
-      text-shadow: 0 0 5px #000;
-      span {
-        margin-left: 20px;
-      }
-    }
-    li {
-      float: left;
-    }
-    .navbar-nav {
-      margin: 0;
-      float: left;
-      li > a {
-        padding-top: 15px;
-        padding-bottom: 15px;
-      }
-    }
-    .navbar-right {
-      float: right;
-    }
-  }
-}
-
-#main-region {
-  .noselect();
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  overflow: auto;
-  background: -webkit-radial-gradient(center, #0a0, #050);
-  background: -o-radial-gradient(center, #0a0, #050);
-  background: -moz-radial-gradient(center, #0a0, #050);
-  background: radial-gradient(center, #0a0, #050);
-  .noselect {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
-  #deck {
-    position: absolute;
-    top: 100px;
-    left: 50px;
-    right: 50px;
-    bottom: 50px;
-
-    .card, .gap {
-      position: absolute;
-      overflow: hidden;
-      height: 97px;
-      width: 72px;
-      margin: 5px;
-
-      &.highlight {
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 4px;
-      }
-    }
-    .card {
-      cursor: pointer;
-
-      &.placed {
-        cursor: default;
-      }
-
-      &:after {
-        position: absolute;
-        content: '';
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 3px;
-      }
-
-      &.placed:after {
-        background: rgba(0, 0, 0, 0.2);
-      }
-
-      &.hint:after {
-        background: rgba(255, 255, 0, 0.2);
-      }
-
-      &.error:after {
-        background: rgba(255, 0, 0, 0.2);
-      }
-    }
-  }
 }
 
 .modal {
