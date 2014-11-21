@@ -7,11 +7,9 @@ var Move = require('models/move');
 module.exports = Chaplin.Controller.extend({
    show: function (params) {
       this.model = new GameModel();
-      this.nav = new NavController({ model: this.model });
-
       this.deck = new CardCollection();
-      this.deck.shuffle();
-      this.checkState();
+
+      this.nav = new NavController({ model: this.model });
 
       this.view = new DeckView({
          model: this.model,
@@ -22,13 +20,13 @@ module.exports = Chaplin.Controller.extend({
       this.subscribeEvent('game:undo', _.bind(this.undoMove, this));
       this.subscribeEvent('card:move', _.bind(this.cardMoved, this));
       this.subscribeEvent('hint:find', _.bind(this.findCard, this));
+
+      this.newGame();
    },
 
    newGame: function() {
-      console.log('start a new game');
       this.model.set(this.model.defaults);
       this.deck.shuffle();
-      this.view.render();
       this.checkState();
    },
 
@@ -55,13 +53,16 @@ module.exports = Chaplin.Controller.extend({
       this.checkPlacedCards();
       this.model.set('score', this.getScore());
 
-      console.log('check to see if all cards are places or if no moves are possible');
-
       var locked = this.getLockedGaps();
-      console.log(locked + ' locked gaps');
-
       if(locked === 4) {
-         console.log('all gaps locked, no more moves possible');
+         if(this.model.get('round') < this.model.get('rounds')) {
+            console.log('round over!');
+            this.model.set('round', this.model.get('round') + 1);
+            this.deck.reShuffle();
+         }
+         else {
+            console.log('game over!');
+         }
       }
    },
 

@@ -20,10 +20,21 @@ module.exports = Chaplin.Collection.extend({
          var random = Math.floor((Math.random() * index));
          this._swap(random, index);
       }
+      this._triggerChange();
    },
 
    reShuffle: function() {
-      // todo: shuffle cards which are not in its correct position
+      var shuffle = [];
+      for (var index = 0; index < this.length; index++) {
+         if (!this.models[index].has('roundPlaced')) {
+            shuffle.push(index);
+         }
+      }
+      for (var index = shuffle.length - 1; index >= 0; index--) {
+         var random = Math.floor((Math.random() * index));
+         this._swap(random, shuffle[index]);
+      }
+      this._triggerChange();
    },
 
    swap: function(from, to) {
@@ -33,6 +44,12 @@ module.exports = Chaplin.Collection.extend({
 
       from.trigger('change:position');
       to.trigger('change:position');
+   },
+
+   _triggerChange: function() {
+      _.each(this.models, function(model) {
+         model.trigger('change:position');
+      });
    },
 
    _swap: function(fromIndex, toIndex) {
