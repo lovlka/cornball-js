@@ -6,16 +6,18 @@ module.exports = Chaplin.View.extend({
       this.template = require('views/gap/gap');
       Chaplin.View.prototype.initialize.call(this, arguments);
 
-      this.listenTo(this.model, 'change:positionY', this.setPositionY, this);
-      this.listenTo(this.model, 'change:positionX', this.setPositionX, this);
+      this.listenTo(this.model, 'change:position', this.setPosition, this);
    },
 
-   setPositionY: function() {
-      this.$el.css({ top: this.model.get('positionY') + 'px' });
-   },
-
-   setPositionX: function() {
-      this.$el.css({ left: this.model.get('positionX') + 'px' });
+   setPosition: function() {
+      var index = this.model.collection.indexOf(this.model);
+      var width = 72 + 10;//this.$el.outerWidth(true);
+      var height = 97 + 10;//this.$el.outerHeight(true);
+      var row = Math.floor(index / 13);
+      var column = index - (row * 13);
+      var positionY = row * height;
+      var positionX = column * width;
+      this.$el.css({ top: positionY + 'px', left: positionX + 'px' });
    },
 
    getTemplateFunction: function() {
@@ -28,6 +30,7 @@ module.exports = Chaplin.View.extend({
 
    render: function() {
       Chaplin.View.prototype.render.call(this, arguments);
+      this.setPosition();
       this.initDrop();
    },
 

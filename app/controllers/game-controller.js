@@ -50,7 +50,6 @@ module.exports = Chaplin.Controller.extend({
       console.log('a card was moved', move.get('from'), move.get('to'));
 
       this.deck.swap(move.get('from'), move.get('to'));
-      this.view.setPositions();
       this.lastMove = move;
 
       this.model.set('moves', this.model.get('moves') + 1);

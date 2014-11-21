@@ -1,7 +1,7 @@
 @import "/app/styles/app.less";
 
-@card-width-medium: 80px;
-@card-height-medium: 100px;
+@card-width-medium: 72px;
+@card-height-medium: 97px;
 @card-margin-medium: 5px;
 
 @card-width-small: 60px;
@@ -19,11 +19,16 @@
   #deck {
     margin: 0 auto;
     position: relative;
+    width: (@card-margin-medium + @card-width-medium + @card-margin-medium) * 13;
+    height: (@card-margin-medium + @card-height-medium + @card-margin-medium) * 4;
 
     .card, .gap {
       position: absolute;
       overflow: hidden;
       background-size: 100%;
+      height: @card-height-medium;
+      width: @card-width-medium;
+      margin: @card-margin-medium;
 
       &.highlight {
         background: rgba(0, 0, 0, 0.2);
@@ -54,7 +59,7 @@
     }
   }
 
-  @media(min-width: 1000px) {
+/*  @media(min-width: 1000px) {
     #deck {
       width: (@card-margin-large + @card-width-large + @card-margin-large) * 13;
       height: (@card-margin-large + @card-height-large + @card-margin-large) * 4;
@@ -90,4 +95,5 @@
       }
     }
   }
+*/
 }

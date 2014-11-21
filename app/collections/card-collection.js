@@ -29,8 +29,10 @@ module.exports = Chaplin.Collection.extend({
    swap: function(from, to) {
       var fromIndex = this.models.indexOf(from);
       var toIndex = this.models.indexOf(to);
-
       this._swap(fromIndex, toIndex);
+
+      from.trigger('change:position');
+      to.trigger('change:position');
    },
 
    _swap: function(fromIndex, toIndex) {

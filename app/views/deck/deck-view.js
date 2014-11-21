@@ -20,32 +20,6 @@ module.exports = Chaplin.CollectionView.extend({
       return new CardView({model: model});
    },
 
-   setPositions: function() {
-      var views = this.getItemViews();
-      var firstView = _.values(views)[0];
-      var width = firstView.$el.outerWidth(true);
-      var height = firstView.$el.outerHeight(true);
-
-      console.log('set positions using...', height, width);
-
-      for (var row = 1; row <= 4; row++) {
-         for (var column = 1; column <= 13; column++) {
-            var card = this.collection.models[((row - 1) * 13) + column - 1];
-
-            var x = (column - 1) * width;
-            var y = (row - 1) * height;
-
-            card.set('positionX', x);
-            card.set('positionY', y);
-         }
-      }
-   },
-
-   render: function() {
-      Chaplin.CollectionView.prototype.render.call(this, arguments);
-      setTimeout(_.bind(this.setPositions, this), 500);
-   },
-
    getTemplateFunction: function() {
       return this.template;
    },
