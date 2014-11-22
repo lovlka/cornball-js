@@ -154,13 +154,11 @@ module.exports = Chaplin.Controller.extend({
       var suit = null;
       for (var i = 0; i < this.deck.length; i++) {
          var card = this.deck.models[i];
-         if (i % 13 === 0) {
-            if (card.get('value') === 2) {
-               this.setRoundPlaced(card);
-               suit = card.get('suit');
-            }
+         if (i % 13 === 0 && card.get('value') === 2) {
+            this.setRoundPlaced(card);
+            suit = card.get('suit');
          }
-         else if (card.get('suit') == suit && card.get('value') === ((i % 13) + 2)) {
+         else if (i % 13 !== 0 && card.get('value') !== 2 && card.get('suit') == suit && card.get('value') === ((i % 13) + 2)) {
             this.setRoundPlaced(card);
          }
          else {

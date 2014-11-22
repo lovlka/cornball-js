@@ -1,5 +1,5 @@
 var CardView = require('views/card/card-view');
-var GapView = require('views/gap/gap-view');
+var GapView = require('views/card/gap-view');
 
 module.exports = Chaplin.CollectionView.extend({
    noWrap: true,

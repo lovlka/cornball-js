@@ -1,47 +1,25 @@
+var BaseView = require('views/card/base-view');
 var Move = require('models/move');
 
-module.exports = Chaplin.View.extend({
+module.exports = BaseView.extend({
    dragX: 0,
    dragY: 0,
-   noWrap: true,
-   autoRender: true,
 
    initialize: function() {
       this.template = require('views/card/card');
-      Chaplin.View.prototype.initialize.call(this, arguments);
+      BaseView.prototype.initialize.call(this, arguments);
 
       this.listenTo(this.model, 'change:roundPlaced', this.setRoundPlaced, this);
-      this.listenTo(this.model, 'change:position', this.setPosition, this);
       this.listenTo(this.model, 'flash:error', this.flashError, this);
       this.listenTo(this.model, 'flash:hint', this.flashHint, this);
-   },
-
-   getTemplateFunction: function() {
-      return this.template;
-   },
-
-   getTemplateData: function() {
-      return this.model.attributes;
    },
 
    setRoundPlaced: function() {
       this.$el.toggleClass('placed', this.model.has('roundPlaced'));
    },
 
-   setPosition: function() {
-      var index = this.model.collection.indexOf(this.model);
-      var width = 72 + 10;//this.$el.outerWidth(true);
-      var height = 97 + 10;//this.$el.outerHeight(true);
-      var row = Math.floor(index / 13);
-      var column = index - (row * 13);
-      var positionY = row * height;
-      var positionX = column * width;
-      this.$el.css({ top: positionY + 'px', left: positionX + 'px' });
-   },
-
    render: function() {
-      Chaplin.View.prototype.render.call(this, arguments);
-      this.setPosition();
+      BaseView.prototype.render.call(this, arguments);
       this.initDrag();
    },
 
