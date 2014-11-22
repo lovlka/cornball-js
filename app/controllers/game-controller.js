@@ -69,24 +69,6 @@ module.exports = Chaplin.Controller.extend({
       this.checkState();
    },
 
-   checkState: function() {
-      this.checkPlacedCards();
-      this.model.set('score', this.getScore());
-
-      var locked = this.getLockedGaps();
-      if(locked === 4) {
-         if(this.model.get('round') < this.model.get('rounds')) {
-            this.gameOverView = new GameOverView({
-               model: this.model,
-               closed: _.bind(this.newRound, this)
-            });
-         }
-         else {
-            console.log('game over!');
-         }
-      }
-   },
-
    findCard: function(gap) {
       _.each(this.deck.models, function(card) {
          if(this.isCorrectGap(gap, card)) {
@@ -134,37 +116,72 @@ module.exports = Chaplin.Controller.extend({
       return false;
    },
 
-   getLockedGaps: function() {
-      var locked = 0;
-      _.each(this.deck.models, function(card) {
-        if(card.get('value') === 1) {
-           var index = this.deck.models.indexOf(card);
-           if(index % 13 !== 0) {
-              var previous = this.deck.models[index - 1].get('value');
-              if(previous === 13 || previous === 1) {
-                 locked++;
-              }
-           }
-        }
-      }, this);
-      return locked;
-   },
+   checkState: function() {
+      this.checkAllCards();
 
-   checkPlacedCards: function() {
-      var suit = null;
-      for (var i = 0; i < this.deck.length; i++) {
-         var card = this.deck.models[i];
-         if (i % 13 === 0 && card.get('value') === 2) {
-            this.setRoundPlaced(card);
-            suit = card.get('suit');
+      if(this.model.get('locked') === 4) {
+         if(this.deck.length - this.model.get('locked') === this.model.get('placed')) {
+            this.gameOverView = new GameOverView({
+               model: this.model
+            });
          }
-         else if (i % 13 !== 0 && card.get('value') !== 2 && card.get('suit') == suit && card.get('value') === ((i % 13) + 2)) {
-            this.setRoundPlaced(card);
+         else if(this.model.get('round') < this.model.get('rounds')) {
+            this.gameOverView = new GameOverView({
+               model: this.model,
+               closed: _.bind(this.newRound, this)
+            });
          }
          else {
-            card.unset('roundPlaced');
-            suit = null;
+            this.gameOverView = new GameOverView({
+               model: this.model
+            });
          }
+      }
+   },
+
+   checkAllCards: function() {
+      var score = 0;
+      var locked = 0;
+      var placed = 0;
+      var suit = null;
+
+      _.each(this.deck.models, function(card) {
+         var index = this.deck.models.indexOf(card);
+         var previous = index > 0 ? this.deck.models[index - 1] : null;
+         var isFirstInRow = index % 13 === 0;
+
+         suit = this.checkRoundPlaced(suit, index, card);
+         if(card.has('roundPlaced')) {
+            placed++;
+         }
+         if(!isFirstInRow && this.isLockedGap(card, previous)) {
+            locked++;
+         }
+         score += this.getCardScore(card);
+      }, this);
+
+      score -= (this.model.get('round') - 1) * 100;
+      score -= this.model.get('moves') * 5;
+
+      this.model.set('placed', placed);
+      this.model.set('locked', locked);
+      this.model.set('score', score);
+   },
+
+   checkRoundPlaced: function(suit, index, card) {
+      var isFirstInRow = index % 13 === 0;
+
+      if (isFirstInRow && card.get('value') === 2) {
+         this.setRoundPlaced(card);
+         return card.get('suit');
+      }
+      else if (!isFirstInRow && card.get('value') !== 2 && card.get('suit') == suit && card.get('value') === ((index % 13) + 2)) {
+         this.setRoundPlaced(card);
+         return card.get('suit');
+      }
+      else {
+         card.unset('roundPlaced');
+         return null;
       }
    },
 
@@ -174,29 +191,26 @@ module.exports = Chaplin.Controller.extend({
       }
    },
 
-   getScore: function() {
-      var score = 0;
+   getCardScore: function(card) {
+      var value = card.get('value');
       var rounds = this.model.get('rounds');
+      var roundPlaced = card.get('roundPlaced') || 0;
 
-      _.each(this.deck.models, function(card) {
-         var value = card.get('value');
-         var roundPlaced = card.get('roundPlaced') || 0;
-
-         if (roundPlaced > 0) {
-            if (value === 13) {
-               score += (rounds - roundPlaced + 1) * 60;
-            }
-            if (value >= 10) {
-               score += (rounds - roundPlaced + 1) * 40;
-            }
-            else {
-               score += (rounds - roundPlaced + 1) * 20;
-            }
+      if (roundPlaced > 0) {
+         if (value === 13) {
+            return (rounds - roundPlaced + 1) * 60;
          }
-      });
+         else if (value >= 10) {
+            return (rounds - roundPlaced + 1) * 40;
+         }
+         else {
+            return (rounds - roundPlaced + 1) * 20;
+         }
+      }
+      return 0;
+   },
 
-      score -= (this.model.get('round') - 1) * 100;
-      score -= this.model.get('moves') * 5;
-      return score;
+   isLockedGap: function(card, previous) {
+      return card.get('value') === 1 && (previous.get('value') === 1 || previous.get('value') === 13);
    }
 });
