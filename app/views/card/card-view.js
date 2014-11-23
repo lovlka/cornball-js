@@ -35,7 +35,7 @@ module.exports = BaseView.extend({
 
    dragStart: function(event) {
       this.publishEvent('card:dragged', this.model);
-      this.$el.css('z-index', 10);
+      this.$el.addClass('dragged');
    },
 
    dragMove: function(event) {
@@ -55,7 +55,7 @@ module.exports = BaseView.extend({
       this.dragX = 0;
       this.dragY = 0;
       this.setDragPosition(event);
-      this.$el.css('z-index', 1);
+      this.$el.removeClass('dragged');
    },
 
    setDragPosition: function(event) {
