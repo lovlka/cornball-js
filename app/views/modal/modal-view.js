@@ -27,6 +27,10 @@ module.exports = Chaplin.View.extend({
       this.$el.modal('show');
    },
 
+   close: function() {
+      this.$el.modal('hide');
+   },
+
    hidden: function() {
       if(_.isFunction(this.closed)) {
          this.closed();

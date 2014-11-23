@@ -1,5 +1,6 @@
 var ModalView = require('views/modal/modal-view');
 var HighscoreCollection = require('collections/highscore-collection');
+var Highscore = require('models/highscore');
 
 module.exports = ModalView.extend({
    initialize: function (options) {
@@ -10,6 +11,11 @@ module.exports = ModalView.extend({
 
       this.model.unset('highscores');
       this.model.unset('ishighscore');
+   },
+
+   events: {
+      'submit form': 'postHighscore',
+      'keyup input': 'enableSubmit'
    },
 
    render: function () {
@@ -27,7 +33,25 @@ module.exports = ModalView.extend({
    fetchSuccess: function() {
       this.model.set('highscores', this.highscores);
       this.model.set('ishighscore', this.highscores.isHighscore(this.model.get('score')));
-      console.log('redering!', this.model);
       this.renderContent();
+      this.enableSubmit();
+      this.$('input[name="name"]').focus();
+   },
+
+   enableSubmit: function() {
+      this.$('[type="submit"]').prop('disabled', this.$('input[name="name"]').val().length === 0);
+   },
+
+   postHighscore: function(event) {
+      event.preventDefault();
+      this.$('[type="submit"]').text('Skickar...').prop('disabled', true);
+
+      var highscore = new Highscore({
+         name: this.$('input[name="name"]').val(),
+         value: this.model.get('score')
+      });
+      highscore.save(highscore.attributes, {
+         success: _.bind(this.close, this)
+      });
    }
 });
