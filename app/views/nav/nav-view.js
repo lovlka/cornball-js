@@ -27,7 +27,7 @@ module.exports = Chaplin.CollectionView.extend({
    fetchSuccess: function() {
       this.spinner.stop();
       var date = moment(this.highscore.get('date'));
-      this.$('#nav-highscore').text('Bäst i ' + date.format('MMMM') + ': ' + this.highscore.get('name') + ' (' + this.highscore.get('value') + ')');
+      this.$('#nav-highscore').text('Högst poäng i ' + date.format('MMMM') + ': ' + this.highscore.get('name') + ' (' + this.highscore.get('value') + ')');
    },
 
    getTemplateFunction: function () {

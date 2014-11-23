@@ -30,18 +30,20 @@ module.exports = Chaplin.Controller.extend({
 
    newGame: function() {
       this.model.set(this.model.defaults);
+      this.lastMove = null;
       this.deck.shuffle();
       this.checkState();
    },
 
    newRound: function() {
       this.model.set('round', this.model.get('round') + 1);
+      this.lastMove = null;
       this.deck.reShuffle();
       this.checkState();
    },
 
    undoMove: function() {
-      if(this.lastMove === undefined) {
+      if(_.isObject(this.lastMove)) {
          this.moveCard(new Move({
             from: this.lastMove.get('to'),
             to: this.lastMove.get('from')
