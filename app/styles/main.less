@@ -1,20 +1,20 @@
 @import "/app/styles/app.less";
 
-@card-width-medium: 72px;
-@card-height-medium: 97px;
-@card-margin-medium: 5px;
+@card-width-medium: 65px;
+@card-height-medium: 90px;
+@card-margin-medium: 4px;
 
-@card-width-small: 60px;
-@card-height-small: 80px;
-@card-margin-small: 3px;
+@card-width-small: 40px;
+@card-height-small: 60px;
+@card-margin-small: 2px;
 
 @card-width-large: 100px;
-@card-height-large: 120px;
-@card-margin-large: 8px;
+@card-height-large: 140px;
+@card-margin-large: 6px;
 
 #main-region {
   .noselect();
-  padding: 20px 40px;
+  padding: 60px 20px 20px 20px;
 
   #deck {
     margin: 0 auto;
@@ -25,7 +25,7 @@
     .card, .gap {
       position: absolute;
       overflow: hidden;
-      background-size: 100%;
+      background-size: 100% 100%;
       height: @card-height-medium;
       width: @card-width-medium;
       margin: @card-margin-medium;
@@ -63,7 +63,7 @@
     }
   }
 
-/*  @media(min-width: 1000px) {
+  @media(min-width: 1500px) {
     #deck {
       width: (@card-margin-large + @card-width-large + @card-margin-large) * 13;
       height: (@card-margin-large + @card-height-large + @card-margin-large) * 4;
@@ -75,19 +75,7 @@
       }
     }
   }
-  @media(max-width: 999px) {
-    #deck {
-      width: (@card-margin-medium + @card-width-medium + @card-margin-medium) * 13;
-      height: (@card-margin-medium + @card-height-medium + @card-margin-medium) * 4;
-
-      .card, .gap {
-        height: @card-height-medium;
-        width: @card-width-medium;
-        margin: @card-margin-medium;
-      }
-    }
-  }
-  @media(max-width: 760px) {
+  @media(max-width: 1000px) {
     #deck {
       width: (@card-margin-small + @card-width-small + @card-margin-small) * 13;
       height: (@card-margin-small + @card-height-small + @card-margin-small) * 4;
@@ -99,5 +87,4 @@
       }
     }
   }
-*/
 }

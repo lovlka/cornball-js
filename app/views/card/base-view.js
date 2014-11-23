@@ -10,13 +10,13 @@ module.exports = Chaplin.View.extend({
 
    setPosition: function() {
       var index = this.model.collection.indexOf(this.model);
-      var width = 72 + 10;//this.$el.outerWidth(true);
-      var height = 97 + 10;//this.$el.outerHeight(true);
+      var width = 100 / 13;//this.$el.outerWidth(true);
+      var height = 100 / 4;//this.$el.outerHeight(true);
       var row = Math.floor(index / 13);
       var column = index - (row * 13);
       var positionY = row * height;
       var positionX = column * width;
-      this.$el.css({ top: positionY + 'px', left: positionX + 'px' });
+      this.$el.css({ top: positionY + '%', left: positionX + '%' });
    },
 
    getTemplateFunction: function() {
