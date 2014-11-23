@@ -2,6 +2,7 @@ var NavController = require('controllers/nav-controller');
 var CardCollection = require('collections/card-collection');
 var DeckView = require('views/deck/deck-view');
 var GameOverView = require('views/gameover/gameover-view');
+var GameWinView = require('views/gamewin/gamewin-view');
 var GameModel = require('models/game');
 var Move = require('models/move');
 
@@ -121,7 +122,7 @@ module.exports = Chaplin.Controller.extend({
 
       if(this.model.get('locked') === 4) {
          if(this.deck.length - this.model.get('locked') === this.model.get('placed')) {
-            this.gameOverView = new GameOverView({
+            this.gameWinView = new GameWinView({
                model: this.model
             });
          }
