@@ -5,4 +5,18 @@
     <strong>Omgång:</strong> <span>{{round}}</span><br />
     <strong>Poäng:</strong> <span>{{score}}</span><br />
     <strong>Antal drag:</strong> <span>{{moves}}</span>
-</p>
+</p><br>
+
+{{#if highscores}}
+    {{#if ishighscore}}
+        <p>
+            Du kom in på topplistan! Skriv in ditt namn för att spara din poäng.
+            <form class="form-inline">
+                <input type="text" name="name" class="form-control" placeholder="Namn" />
+                <button type="submit" class="btn btn-success">Skicka</button>
+            </form>
+        </p>
+    {{else}}
+        <p>Tyvärr kom du inte in på topplistan den här gången.</p>
+    {{/if}}
+{{/if}}
