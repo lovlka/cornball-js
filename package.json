@@ -3,10 +3,10 @@
   "name": "cornball-js",
   "description": "Cornball",
   "version": "1.0.0",
-  "homepage": "",
+  "homepage": "http://cornball-js.github.io",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:lovlka/cornball-js.git"
   },
   "scripts": {
     "start": "brunch watch --server",

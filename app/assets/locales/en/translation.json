@@ -1,0 +1,11 @@
+{
+  "head": {
+    "title": "The Cornball",
+    "description": "Lantisen är en farligt beroendeframkallande patiens, där du genom att flytta om korten ska placera dem i ordning från 2 till kung."
+  },
+  "nav": {
+    "round": "Round",
+    "score": "Score",
+    "moves": "Moves"
+  }
+}
