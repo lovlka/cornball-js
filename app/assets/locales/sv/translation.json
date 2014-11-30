@@ -7,5 +7,14 @@
     "round": "Omgång",
     "score": "Poäng",
     "moves": "Drag"
+  },
+  "stats": {
+    "GamesStarted": "Slutförda spel",
+    "GamesLost": "Förlorade spel",
+    "GamesWonRound1": "Vinst i omgång 1",
+    "GamesWonRound2": "Vinst i omgång 2",
+    "GamesWonRound3": "Vinst i omgång 3",
+    "GamesWonRound4": "Vinst i omgång 4",
+    "GamesWonRound5": "Vinst i omgång 5"
   }
 }

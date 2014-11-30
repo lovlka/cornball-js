@@ -1,11 +1,20 @@
 {
   "head": {
     "title": "The Cornball",
-    "description": "Lantisen är en farligt beroendeframkallande patiens, där du genom att flytta om korten ska placera dem i ordning från 2 till kung."
+    "description": "The Cornball is an addictive card game where you by moving the cards should place them in order from 2 to King."
   },
   "nav": {
     "round": "Round",
     "score": "Score",
     "moves": "Moves"
+  },
+  "stats": {
+    "GamesStarted": "Played games",
+    "GamesLost": "Lost games",
+    "GamesWonRound1": "Completed in round 1",
+    "GamesWonRound2": "Completed in round 2",
+    "GamesWonRound3": "Completed in round 3",
+    "GamesWonRound4": "Completed in round 4",
+    "GamesWonRound5": "Completed in round 5"
   }
 }
