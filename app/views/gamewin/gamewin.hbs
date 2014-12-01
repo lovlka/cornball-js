@@ -1,22 +1,20 @@
+<p>{{{lang "gamewin.description"}}}</p>
 <p>
-    Du har lagt samtliga kort på rätt plats och slutfört Lantisen!
-</p>
-<p>
-    <strong>Omgång:</strong> <span>{{round}}</span><br />
-    <strong>Poäng:</strong> <span>{{score}}</span><br />
-    <strong>Antal drag:</strong> <span>{{moves}}</span>
+    <strong>{{{lang "nav.round"}}}:</strong> <span>{{round}}</span><br />
+    <strong>{{{lang "nav.score"}}}:</strong> <span>{{score}}</span><br />
+    <strong>{{{lang "nav.moves"}}}:</strong> <span>{{moves}}</span>
 </p><br>
 
 {{#if highscores}}
     {{#if ishighscore}}
         <p>
-            Du kom in på topplistan! Skriv in ditt namn för att spara din poäng.
+            {{{lang "gamewin.highscore"}}}
             <form class="form-inline">
-                <input type="text" name="name" class="form-control" placeholder="Namn" />
-                <button type="submit" class="btn btn-success">Skicka</button>
+                <input type="text" name="name" class="form-control" placeholder="{{{lang "gamewin.name"}}}" />
+                <button type="submit" class="btn btn-success">{{{lang "gamewin.post"}}}</button>
             </form>
         </p>
     {{else}}
-        <p>Tyvärr kom du inte in på topplistan den här gången.</p>
+        <p>{{{lang "gamewin.nohighscore"}}}</p>
     {{/if}}
 {{/if}}

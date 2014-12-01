@@ -4,7 +4,7 @@ var Highscore = require('models/highscore');
 
 module.exports = ModalView.extend({
    initialize: function (options) {
-      this.title = "Grattis!";
+      this.title = i18n.t('gamewin.title');
       this.bodyTemplate = require('views/gamewin/gamewin');
       this.highscores = new HighscoreCollection();
       ModalView.prototype.initialize.call(this, arguments);
@@ -44,7 +44,7 @@ module.exports = ModalView.extend({
 
    postHighscore: function(event) {
       event.preventDefault();
-      this.$('[type="submit"]').text('Skickar...').prop('disabled', true);
+      this.$('[type="submit"]').text(i18n.t('gamewin.posting')).prop('disabled', true);
 
       var highscore = new Highscore({
          name: this.$('input[name="name"]').val(),

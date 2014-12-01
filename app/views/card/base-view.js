@@ -10,8 +10,8 @@ module.exports = Chaplin.View.extend({
 
    setPosition: function() {
       var index = this.model.collection.indexOf(this.model);
-      var width = 100 / 13;//this.$el.outerWidth(true);
-      var height = 100 / 4;//this.$el.outerHeight(true);
+      var width = 100 / 13;
+      var height = 100 / 4;
       var row = Math.floor(index / 13);
       var column = index - (row * 13);
       var positionY = row * height;

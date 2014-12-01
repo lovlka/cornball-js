@@ -21,16 +21,34 @@
     "contact": "Bli fan av Lantisen på Facebook! Där har du möjlighet att framföra synpunkter eller komma i kontakt med mig. Tack för att du spelar Lantisen!"
   },
   "highscore": {
-    "title": "Topplista"
+    "title": "Topplista",
+    "header": "Högst poäng i %s: %s (%s)"
   },
   "statistics": {
     "title": "Statistik",
-    "GamesStarted": "Slutförda spel",
-    "GamesLost": "Förlorade spel",
-    "GamesWonRound1": "Vinst i omgång 1",
-    "GamesWonRound2": "Vinst i omgång 2",
-    "GamesWonRound3": "Vinst i omgång 3",
-    "GamesWonRound4": "Vinst i omgång 4",
-    "GamesWonRound5": "Vinst i omgång 5"
+    "gamesStarted": "Slutförda spel",
+    "gamesLost": "Förlorade spel",
+    "gamesWonRound1": "Vinst i omgång 1",
+    "gamesWonRound2": "Vinst i omgång 2",
+    "gamesWonRound3": "Vinst i omgång 3",
+    "gamesWonRound4": "Vinst i omgång 4",
+    "gamesWonRound5": "Vinst i omgång 5"
+  },
+  "roundover": {
+    "title": "Slut på omgång %s",
+    "description": "Inga fler drag kan göras, korten blandas om..."
+  },
+  "gameover": {
+    "title": "Spelet är slut!",
+    "description": "Du misslyckades att slutföra Lantisen!"
+  },
+  "gamewin": {
+    "title": "Grattis!",
+    "description": "Du har lagt samtliga kort på rätt plats och slutfört Lantisen!",
+    "highscore": "Du kom in på topplistan! Skriv in ditt namn för att spara din poäng.",
+    "nohighscore": "Tyvärr kom du inte in på topplistan den här gången.",
+    "name": "Ange ditt namn",
+    "post": "Skicka",
+    "posting": "Skickar..."
   }
 }

@@ -3,7 +3,7 @@ var Application = require('application');
 $(function () {
    require('mockjax');
 
-   i18n.init({ fallbackLng: 'en', getAsync: false }, function(t) {
+   i18n.init({ fallbackLng: 'en', postProcess: 'sprintf', getAsync: false }, function(t) {
       $('title').text(t('main.title'));
       $('meta[name=author]').prop('content', t('main.author'));
       $('meta[name=description]').prop('content', t('main.description'));
