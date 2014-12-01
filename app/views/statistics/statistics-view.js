@@ -3,7 +3,7 @@ var StatisticsCollection = require('collections/statistics-collection');
 
 module.exports = ModalView.extend({
    initialize: function (options) {
-      this.title = "Statistik";
+      this.title = i18n.t('statistics.title');
       this.bodyTemplate = require('views/statistics/statistics');
       this.statistics = new StatisticsCollection();
       ModalView.prototype.initialize.call(this, arguments);

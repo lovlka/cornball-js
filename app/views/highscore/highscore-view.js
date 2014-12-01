@@ -3,7 +3,7 @@ var HighscoreCollection = require('collections/highscore-collection');
 
 module.exports = ModalView.extend({
    initialize: function (options) {
-      this.title = "Topplista";
+      this.title = i18n.t('highscore.title');
       this.bodyTemplate = require('views/highscore/highscore');
       this.highscores = new HighscoreCollection();
       ModalView.prototype.initialize.call(this, arguments);
