@@ -1,12 +1,24 @@
 {
-  "head": {
+  "main": {
     "title": "Lantisen",
+    "author": "Victor Stodell",
     "description": "Lantisen är en farligt beroendeframkallande patiens, där du genom att flytta om korten ska placera dem i ordning från 2 till kung."
   },
   "nav": {
+    "newgame": "Starta nytt spel",
+    "undo": "Ångra senaste drag",
+    "highscore": "Visa topplista",
+    "statistics": "Visa statistik",
+    "about": "Om Lantisen",
     "round": "Omgång",
     "score": "Poäng",
     "moves": "Drag"
+  },
+  "about": {
+    "title": "Om Lantisen",
+    "info": "Lantisen går ut på att lägga samtliga kort i ordning från 2 till kung med en färg på varje rad. Vilken färg som läggs på respektive rad spelar ingen roll. Tvåor kan endast läggas i en lucka längst till vänster på spelplanen. Övriga kort kan endast läggas i en lucka till höger om det kort i samma färg som kommer före i ordningen. I en lucka efter kung kan inget kort läggas.",
+    "help": "Dra ett kort till rätt lucka eller dubbelklicka på kortet för att automatiskt hitta rätt plats. Klicka på en lucka så blinkar det kort som kan läggas i luckan.",
+    "contact": "Bli fan av Lantisen på Facebook! Där har du möjlighet att framföra synpunkter eller komma i kontakt med mig. Tack för att du spelar Lantisen!"
   },
   "stats": {
     "GamesStarted": "Slutförda spel",

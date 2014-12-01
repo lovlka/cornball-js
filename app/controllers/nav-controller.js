@@ -10,11 +10,11 @@ module.exports = Chaplin.Controller.extend({
       this.model = options.model;
 
       this.collection = new NavCollection([
-         { action: 'newgame', text: 'Starta nytt spel', icon: 'refresh' },
-         { action: 'undo', text: 'Ångra senaste drag', icon: 'reply' },
-         { action: 'highscore', text: 'Visa topplista', icon: 'star' },
-         { action: 'statistics', text: 'Visa statistik', icon: 'pie-chart' },
-         { action: 'about', text: 'Om Lantisen', icon: 'question' }
+         { action: 'newgame', icon: 'refresh' },
+         { action: 'undo', icon: 'reply' },
+         { action: 'highscore', icon: 'star' },
+         { action: 'statistics', icon: 'pie-chart' },
+         { action: 'about', icon: 'question' }
       ]);
 
       this.view = new NavView({

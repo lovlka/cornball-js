@@ -1,12 +1,24 @@
 {
-  "head": {
+  "main": {
     "title": "The Cornball",
+    "author": "Victor Stodell",
     "description": "The Cornball is an addictive card game where you by moving the cards should place them in order from 2 to King."
   },
   "nav": {
+    "newgame": "Start new game",
+    "undo": "Undo last move",
+    "highscore": "Show high score",
+    "statistics": "Show statistics",
+    "about": "About The Cornball",
     "round": "Round",
     "score": "Score",
     "moves": "Moves"
+  },
+  "about": {
+    "title": "About The Cornball",
+    "info": "Lantisen går ut på att lägga samtliga kort i ordning från 2 till kung med en färg på varje rad. Vilken färg som läggs på respektive rad spelar ingen roll. Tvåor kan endast läggas i en lucka längst till vänster på spelplanen. Övriga kort kan endast läggas i en lucka till höger om det kort i samma färg som kommer före i ordningen. I en lucka efter kung kan inget kort läggas.",
+    "help": "Dra ett kort till rätt lucka eller dubbelklicka på kortet för att automatiskt hitta rätt plats. Klicka på en lucka så blinkar det kort som kan läggas i luckan.",
+    "contact": "Bli fan av Lantisen på Facebook! Där har du möjlighet att framföra synpunkter eller komma i kontakt med mig. Tack för att du spelar Lantisen!"
   },
   "stats": {
     "GamesStarted": "Played games",
