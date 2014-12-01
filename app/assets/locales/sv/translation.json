@@ -22,7 +22,9 @@
   },
   "highscore": {
     "title": "Topplista",
-    "header": "Högst poäng i %s: %s (%s)"
+    "header": "Högst poäng i %s: %s (%s)",
+    "alltime": "Bäst genom tiderna",
+    "month": "Bäst i %s"
   },
   "statistics": {
     "title": "Statistik",

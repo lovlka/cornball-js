@@ -1,9 +1,26 @@
-<table class="table table-striped">
-  {{#each highscores.models}}
-      <tr>
-          <td>{{attributes.name}}</td>
-          <td>{{attributes.date}}</td>
-          <td>{{attributes.value}}</td>
-      </tr>
-  {{/each}}
-</table>
+<div class="row">
+    <div class="col-sm-6">
+        <h5>{{{lang "highscore.alltime"}}}</h5>
+        <table class="table table-striped">
+           {{#each highscores.models}}
+               <tr>
+                   <td>{{attributes.name}}</td>
+                   <td>{{attributes.date}}</td>
+                   <td>{{attributes.value}}</td>
+               </tr>
+           {{/each}}
+        </table>
+    </div>
+    <div class="col-sm-6">
+        <h5>{{{lang "highscore.month"}}}</h5>
+        <table class="table table-striped">
+           {{#each highscores.models}}
+               <tr>
+                   <td>{{attributes.name}}</td>
+                   <td>{{attributes.date}}</td>
+                   <td>{{attributes.value}}</td>
+               </tr>
+           {{/each}}
+        </table>
+    </div>
+</div>
