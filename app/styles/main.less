@@ -14,11 +14,11 @@
 
 #main-region {
   .noselect();
-  padding: 60px 20px 20px 20px;
 
   #deck {
-    margin: 0 auto;
-    position: relative;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
     width: (@card-margin-medium + @card-width-medium + @card-margin-medium) * 13;
     height: (@card-margin-medium + @card-height-medium + @card-margin-medium) * 4;
 
@@ -79,6 +79,7 @@
     #deck {
       width: (@card-margin-small + @card-width-small + @card-margin-small) * 13;
       height: (@card-margin-small + @card-height-small + @card-margin-small) * 4;
+
 
       .card, .gap {
         height: @card-height-small;
