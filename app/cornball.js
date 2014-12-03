@@ -12,6 +12,10 @@ $(function () {
       return new Handlebars.SafeString(i18n.t(key));
    });
 
+   Handlebars.registerHelper('date', function(date, format) {
+      return moment(date).format(format);
+   });
+
    $.ajaxSetup({
       beforeSend: function(jqXHR) {
          this.url = 'http://localhost:51839' + this.url;

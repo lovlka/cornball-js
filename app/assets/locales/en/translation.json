@@ -24,7 +24,7 @@
     "title": "High score",
     "header": "High score in %s: %s (%s)",
     "alltime": "All time high",
-    "month": "Best in %s"
+    "month": "Best this month"
   },
   "statistics": {
     "title": "Statistics",

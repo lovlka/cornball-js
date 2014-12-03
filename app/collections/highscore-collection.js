@@ -1,9 +1,6 @@
 module.exports = Chaplin.Collection.extend({
-   startDate: null,
-   endDate: null,
-
    url: function() {
-      if(this.startDate !== null && this.endDate !== null) {
+      if(_.isString(this.startDate) && _.isString(this.endDate)) {
          return 'api/highscores/' + this.startDate + '/' + this.endDate;
       }
       return '/api/highscores';

@@ -24,7 +24,7 @@
     "title": "Topplista",
     "header": "Högst poäng i %s: %s (%s)",
     "alltime": "Bäst genom tiderna",
-    "month": "Bäst i %s"
+    "month": "Bäst denna månad"
   },
   "statistics": {
     "title": "Statistik",
