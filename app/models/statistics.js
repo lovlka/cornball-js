@@ -1,3 +1,3 @@
 module.exports = Chaplin.Model.extend({
-   url: '/api/statistic'
+   url: '/api/statistics'
 });

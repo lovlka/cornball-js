@@ -1,5 +1,13 @@
 module.exports = Chaplin.Collection.extend({
-   url: '/api/highscores/10',
+   startDate: null,
+   endDate: null,
+
+   url: function() {
+      if(this.startDate !== null && this.endDate !== null) {
+         return 'api/highscores/' + this.startDate + '/' + this.endDate;
+      }
+      return '/api/highscores';
+   },
 
    isHighscore: function(score) {
       if(this.length < 10) {

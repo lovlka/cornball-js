@@ -3,6 +3,7 @@ var CardCollection = require('collections/card-collection');
 var DeckView = require('views/deck/deck-view');
 var GameOverView = require('views/gameover/gameover-view');
 var GameWinView = require('views/gamewin/gamewin-view');
+var Statistics = require('models/statistics');
 var GameModel = require('models/game');
 var Move = require('models/move');
 
@@ -29,6 +30,7 @@ module.exports = Chaplin.Controller.extend({
    },
 
    newGame: function() {
+      this.increaseStatistics('gamesStarted');
       this.model.set(this.model.defaults);
       this.lastMove = null;
       this.deck.shuffle();
@@ -215,5 +217,12 @@ module.exports = Chaplin.Controller.extend({
 
    isLockedGap: function(card, previous) {
       return card.get('value') === 1 && (previous.get('value') === 1 || previous.get('value') === 13);
+   },
+
+   increaseStatistics: function(property) {
+      var statistics = new Statistics({
+         name: property
+      });
+      statistics.save();
    }
 });
