@@ -1,8 +1,6 @@
 var Application = require('application');
 
 $(function () {
-   require('mockjax');
-
    i18n.init({ fallbackLng: 'en', postProcess: 'sprintf', getAsync: false }, function(t) {
       $('title').text(t('main.title'));
       $('meta[name=author]').prop('content', t('main.author'));
@@ -12,6 +10,12 @@ $(function () {
    Handlebars.registerHelper('lang', function(arg1, arg2) {
       var key = _.isString(arg2) ? arg1 + '.' + arg2 : arg1;
       return new Handlebars.SafeString(i18n.t(key));
+   });
+
+   $.ajaxSetup({
+      beforeSend: function(jqXHR) {
+         this.url = 'http://cornball.cloudapp.net' + this.url;
+      }
    });
 
    new Application({
