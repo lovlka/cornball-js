@@ -28,7 +28,7 @@
   },
   "statistics": {
     "title": "Statistics",
-    "gamesStarted": "Played games",
+    "gamesPlayed": "Played games",
     "gamesLost": "Lost games",
     "gamesWonRound1": "Completed in round 1",
     "gamesWonRound2": "Completed in round 2",

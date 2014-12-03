@@ -1,8 +1,20 @@
 <table class="table table-striped">
-{{#each statistics.models}}
-   <tr>
-       <td>{{{lang "statistics" attributes.name}}}</td>
-       <td>{{attributes.value}}</td>
-   </tr>
-{{/each}}
+    {{#if total}}
+        <thead>
+        <tr>
+            <th>{{{lang "statistics.gamesPlayed"}}}</th>
+            <th class="text-right">{{gamesPlayed}}</th>
+            <th class="text-right"></th>
+        </tr>
+        </thead>
+    {{/if}}
+    <tbody>
+    {{#each statistics.models}}
+        <tr>
+            <td>{{{lang "statistics" attributes.name}}}</td>
+            <td class="text-right">{{attributes.value}}</td>
+            <td class="text-right">{{attributes.percentage}}%</td>
+        </tr>
+    {{/each}}
+    </tbody>
 </table>

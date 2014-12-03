@@ -28,7 +28,7 @@
   },
   "statistics": {
     "title": "Statistik",
-    "gamesStarted": "Slutförda spel",
+    "gamesPlayed": "Spelade spel",
     "gamesLost": "Förlorade spel",
     "gamesWonRound1": "Vinst i omgång 1",
     "gamesWonRound2": "Vinst i omgång 2",

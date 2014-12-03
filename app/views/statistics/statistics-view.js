@@ -22,7 +22,20 @@ module.exports = ModalView.extend({
    },
 
    fetchSuccess: function() {
+      this.statistics.remove(this.statistics.where({ name: 'gamesStarted' }));
+
+      var gamesPlayed = 0;
+      _.each(this.statistics.models, function(model) {
+         gamesPlayed += model.get('value');
+      });
+
+      _.each(this.statistics.models, function(model) {
+         var percentage = model.get('value') / gamesPlayed * 100;
+         model.set('percentage', percentage.toFixed(2));
+      });
+
       this.model.set('statistics', this.statistics);
+      this.model.set('gamesPlayed', gamesPlayed);
       this.renderContent();
    }
 });
