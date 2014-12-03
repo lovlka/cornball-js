@@ -14,7 +14,7 @@ $(function () {
 
    $.ajaxSetup({
       beforeSend: function(jqXHR) {
-         this.url = 'http://cornball.cloudapp.net' + this.url;
+         this.url = 'http://localhost:51839' + this.url;
       }
    });
 

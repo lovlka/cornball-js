@@ -1,6 +1,7 @@
 var NavController = require('controllers/nav-controller');
 var CardCollection = require('collections/card-collection');
 var DeckView = require('views/deck/deck-view');
+var RoundOverView = require('views/roundover/roundover-view');
 var GameOverView = require('views/gameover/gameover-view');
 var GameWinView = require('views/gamewin/gamewin-view');
 var Statistics = require('models/statistics');
@@ -129,9 +130,10 @@ module.exports = Chaplin.Controller.extend({
             this.gameWinView = new GameWinView({
                model: this.model
             });
+            this.increaseStatistics('gamesWonRound' + this.model.get('round'));
          }
          else if(this.model.get('round') < this.model.get('rounds')) {
-            this.gameOverView = new GameOverView({
+            this.roundOverView = new RoundOverView({
                model: this.model,
                closed: _.bind(this.newRound, this)
             });
@@ -140,6 +142,7 @@ module.exports = Chaplin.Controller.extend({
             this.gameOverView = new GameOverView({
                model: this.model
             });
+            this.increaseStatistics('gamesLost');
          }
       }
    },
