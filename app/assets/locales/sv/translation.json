@@ -38,7 +38,8 @@
   },
   "roundover": {
     "title": "Slut på omgång %s",
-    "description": "Inga fler drag kan göras, korten blandas om..."
+    "description": "Inga fler drag kan göras, korten blandas om...",
+    "continue": "Nästa omgång"
   },
   "gameover": {
     "title": "Spelet är slut!",

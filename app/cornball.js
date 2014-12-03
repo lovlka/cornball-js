@@ -18,7 +18,7 @@ $(function () {
 
    $.ajaxSetup({
       beforeSend: function(jqXHR) {
-         this.url = 'http://localhost:51839' + this.url;
+         //this.url = 'http://localhost:51839' + this.url;
       }
    });
 

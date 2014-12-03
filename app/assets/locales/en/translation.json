@@ -38,7 +38,8 @@
   },
   "roundover": {
     "title": "End of round %s",
-    "description": "No more moves can be done, the cards are being reshuffled..."
+    "description": "No more moves can be done, the cards are being reshuffled...",
+    "continue": "Next round"
   },
   "gameover": {
     "title": "Game over!",
