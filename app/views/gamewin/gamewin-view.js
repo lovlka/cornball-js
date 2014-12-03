@@ -25,6 +25,7 @@ module.exports = ModalView.extend({
 
    fetchHighScore: function() {
       this.showSpinner();
+      this.highscores.startDate = moment().date(1).format('YYYY-MM-DD');
       this.highscores.fetch({
          success: _.bind(this.fetchSuccess, this)
       });
