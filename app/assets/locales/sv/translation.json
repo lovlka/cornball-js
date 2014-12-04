@@ -16,18 +16,21 @@
   },
   "about": {
     "title": "Om Lantisen",
+    "dismiss": "Stäng",
     "info": "Lantisen går ut på att lägga samtliga kort i ordning från 2 till kung med en färg på varje rad. Vilken färg som läggs på respektive rad spelar ingen roll. Tvåor kan endast läggas i en lucka längst till vänster på spelplanen. Övriga kort kan endast läggas i en lucka till höger om det kort i samma färg som kommer före i ordningen. I en lucka efter kung kan inget kort läggas.",
     "help": "Dra ett kort till rätt lucka eller dubbelklicka på kortet för att automatiskt hitta rätt plats. Klicka på en lucka så blinkar det kort som kan läggas i luckan.",
     "contact": "Bli fan av Lantisen på Facebook! Där har du möjlighet att framföra synpunkter eller komma i kontakt med mig. Tack för att du spelar Lantisen!"
   },
   "highscore": {
     "title": "Topplista",
+    "dismiss": "Stäng",
     "header": "Högst poäng i %s: %s (%s)",
     "alltime": "Bäst genom tiderna",
     "month": "Bäst denna månad"
   },
   "statistics": {
     "title": "Statistik",
+    "dismiss": "Stäng",
     "gamesPlayed": "Spelade spel",
     "gamesLost": "Förlorade spel",
     "gamesWonRound1": "Vinst i omgång 1",
@@ -38,15 +41,17 @@
   },
   "roundover": {
     "title": "Slut på omgång %s",
-    "description": "Inga fler drag kan göras, korten blandas om...",
-    "continue": "Nästa omgång"
+    "dismiss": "Stäng",
+    "description": "Inga fler drag kan göras, korten blandas om..."
   },
   "gameover": {
     "title": "Spelet är slut!",
+    "dismiss": "Stäng",
     "description": "Du misslyckades att slutföra Lantisen!"
   },
   "gamewin": {
     "title": "Grattis!",
+    "dismiss": "Stäng",
     "description": "Du har lagt samtliga kort på rätt plats och slutfört Lantisen!",
     "highscore": "Du kom in på topplistan! Skriv in ditt namn för att spara din poäng.",
     "nohighscore": "Tyvärr kom du inte in på topplistan den här gången.",

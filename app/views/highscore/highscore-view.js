@@ -4,6 +4,7 @@ var HighscoreCollection = require('collections/highscore-collection');
 module.exports = ModalView.extend({
    initialize: function (options) {
       this.title = i18n.t('highscore.title');
+      this.dismiss = i18n.t('highscore.dismiss');
       this.bodyTemplate = require('views/highscore/highscore');
       this.allTime = new HighscoreCollection();
       this.month = new HighscoreCollection();

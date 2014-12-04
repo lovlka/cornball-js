@@ -5,6 +5,7 @@ var Highscore = require('models/highscore');
 module.exports = ModalView.extend({
    initialize: function (options) {
       this.title = i18n.t('gamewin.title');
+      this.dismiss = i18n.t('gamewin.dismiss');
       this.bodyTemplate = require('views/gamewin/gamewin');
       this.highscores = new HighscoreCollection();
       ModalView.prototype.initialize.call(this, arguments);

@@ -4,7 +4,7 @@ module.exports = Chaplin.View.extend({
    container: 'body',
    containerMethod: 'append',
 
-   optionNames: Chaplin.View.prototype.optionNames.concat(['title', 'bodyTemplate', 'closed']),
+   optionNames: Chaplin.View.prototype.optionNames.concat(['title', 'bodyTemplate', 'dismiss', 'closed']),
 
    initialize: function(options) {
       this.template = require('views/modal/modal');
@@ -50,6 +50,7 @@ module.exports = Chaplin.View.extend({
       }
 
       this.$('.modal-title').text(this.title);
+      this.$('.modal-dismiss').text(this.dismiss);
       this.$('.modal-body').html(this.bodyTemplate(this.model.attributes));
    }
 });
