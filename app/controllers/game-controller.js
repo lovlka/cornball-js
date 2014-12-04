@@ -32,6 +32,7 @@ module.exports = Chaplin.Controller.extend({
 
    newGame: function() {
       this.increaseStatistics('gamesStarted');
+      this.publishEvent('highscore:reload');
       this.model.set(this.model.defaults);
       this.lastMove = null;
       this.deck.shuffle();
@@ -39,6 +40,7 @@ module.exports = Chaplin.Controller.extend({
    },
 
    newRound: function() {
+      this.publishEvent('highscore:reload');
       this.model.set('round', this.model.get('round') + 1);
       this.lastMove = null;
       this.deck.reShuffle();

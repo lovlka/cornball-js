@@ -53,7 +53,12 @@ module.exports = ModalView.extend({
          value: this.model.get('score')
       });
       highscore.save(highscore.attributes, {
-         success: _.bind(this.close, this)
+         success: _.bind(this.highscoreSaved, this)
       });
+   },
+
+   highscoreSaved: function() {
+      this.publishEvent('highscore:reload');
+      this.close();
    }
 });

@@ -13,6 +13,8 @@ module.exports = Chaplin.CollectionView.extend({
       this.highscore = new Highscore();
       this.template = require('views/nav/nav');
       Chaplin.CollectionView.prototype.initialize.call(this, arguments);
+
+      this.subscribeEvent('highscore:reload', _.bind(this.fetchHighscore, this));
    },
 
    fetchHighscore: function() {
@@ -36,10 +38,5 @@ module.exports = Chaplin.CollectionView.extend({
 
    getTemplateData: function () {
       return this.model.attributes;
-   },
-
-   render: function () {
-      Chaplin.CollectionView.prototype.render.call(this, arguments);
-      this.fetchHighscore();
    }
 });
