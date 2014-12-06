@@ -118,7 +118,7 @@ module.exports = Chaplin.Controller.extend({
             return true;
          }
          else if(!isGapFirstInRow && !isCardValueTwo && isSuitMatch && isValueMatch) {
-            return true
+            return true;
          }
       }
       return false;

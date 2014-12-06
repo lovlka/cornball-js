@@ -24,13 +24,14 @@ module.exports = Chaplin.Collection.extend({
    },
 
    reShuffle: function() {
+      var index;
       var shuffle = [];
-      for (var index = 0; index < this.length; index++) {
+      for (index = 0; index < this.length; index++) {
          if (!this.models[index].has('roundPlaced')) {
             shuffle.push(index);
          }
       }
-      for (var index = shuffle.length - 1; index >= 0; index--) {
+      for (index = shuffle.length - 1; index >= 0; index--) {
          var random = Math.floor((Math.random() * index));
          this._swap(shuffle[random], shuffle[index]);
       }

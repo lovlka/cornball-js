@@ -1,8 +1,8 @@
 module.exports = Chaplin.Collection.extend({
    url: function() {
-      return '/api/highscores'
-         + (_.isString(this.startDate) ? '/' + this.startDate : '')
-         + (_.isString(this.endDate) ? '/' + this.endDate : '');
+      return '/api/highscores' +
+         (_.isString(this.startDate) ? '/' + this.startDate : '') +
+         (_.isString(this.endDate) ? '/' + this.endDate : '');
    },
 
    isHighscore: function(score) {
