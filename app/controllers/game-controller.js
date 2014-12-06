@@ -146,6 +146,7 @@ module.exports = Chaplin.Controller.extend({
             });
             this.increaseStatistics('gamesLost');
          }
+         this.lastMove = null;
       }
    },
 
