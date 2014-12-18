@@ -26,7 +26,7 @@
     "dismiss": "Stäng",
     "header": "Högst poäng i %s: %s (%s)",
     "alltime": "Bäst genom tiderna",
-    "month": "Bäst denna månad"
+    "month": "Bäst i %s"
   },
   "statistics": {
     "title": "Statistik",

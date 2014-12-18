@@ -26,7 +26,7 @@
     "dismiss": "Close",
     "header": "High score in %s: %s (%s)",
     "alltime": "All time high",
-    "month": "Best this month"
+    "month": "Best in %s"
   },
   "statistics": {
     "title": "Statistics",

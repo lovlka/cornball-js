@@ -11,7 +11,7 @@
                {{#each allTime.models}}
                    <tr>
                        <td>{{attributes.name}}</td>
-                       <td>{{{date attributes.date 'YYYY-MM-DD'}}}</td>
+                       <td>{{{date attributes.date 'L'}}}</td>
                        <td class="text-right">{{attributes.value}}</td>
                    </tr>
                {{/each}}
@@ -24,14 +24,20 @@
            {{#if month}}
                <thead>
                <tr>
-                   <th colspan="3">{{{lang "highscore.month"}}}</th>
+                   <th colspan="3">
+                       <div class="btn-group btn-group-xs pull-right">
+                           <a href="#" class="btn btn-default js-prev"><i class="fa fa-chevron-left"></i></a>
+                           <a href="#" class="btn btn-default js-next"><i class="fa fa-chevron-right"></i></a>
+                       </div>
+                       {{monthHeader}}
+                   </th>
                </tr>
                </thead>
                <tbody>
                {{#each month.models}}
                    <tr>
                        <td>{{attributes.name}}</td>
-                       <td>{{{date attributes.date 'YYYY-MM-DD'}}}</td>
+                       <td>{{{date attributes.date 'L'}}}</td>
                        <td class="text-right">{{attributes.value}}</td>
                    </tr>
                {{/each}}
