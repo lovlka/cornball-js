@@ -3,6 +3,7 @@
    "version": "0.1.0",
    "main": "public/javascripts/cornball.js",
    "dependencies": {
+      "backbone": "1.1.2",
       "chaplin": "~1.0.0",
       "console-polyfill": "~0.1.0",
       "lodash": "~2.4.0",
