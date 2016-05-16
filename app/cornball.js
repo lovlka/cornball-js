@@ -19,7 +19,7 @@ $(function () {
    $.ajaxSetup({
       beforeSend: function(jqXHR) {
          if(window.location.hostname === 'localhost') {
-            this.url = 'http://cornball.cloudapp.net' + this.url;
+            this.url = 'http://cornball.azurewebsites.net' + this.url;
          }
       }
    });
